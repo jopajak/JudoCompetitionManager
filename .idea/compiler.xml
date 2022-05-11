@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="JudoCompetitionManager" target="17" />
+      <module name="JudoCompetitionManager" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>

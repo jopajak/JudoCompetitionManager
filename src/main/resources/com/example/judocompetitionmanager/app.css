@@ -1,0 +1,19 @@
+.root{
+    /*-fx-background-color: #7C0DCE;*/
+    -fx-background-image: url("bcg.jpg");
+    -fx-max-height: 400;
+    -fx-max-width: 600;
+    -fx-min-height: 400;
+    -fx-min-width: 600;
+}
+.button{
+    -fx-background-color: "purple";
+    -fx-font-size: 15;
+    -fx-text-fill: "white";
+    -fx-alignment: center;
+
+}
+.label{
+    -fx-text-fill: "white";
+    -fx-alignment: center;
+}
