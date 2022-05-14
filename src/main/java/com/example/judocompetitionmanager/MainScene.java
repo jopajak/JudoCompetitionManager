@@ -35,6 +35,7 @@ public class MainScene extends Application {
             stage.getIcons().add(new Image("icon.jpg"));
             stage.setScene(scene);
             stage.show();
+            System.out.println("Kuba dahe fula");
 
         }catch(Exception e) {
             e.printStackTrace();
