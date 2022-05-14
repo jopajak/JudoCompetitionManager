@@ -25,7 +25,7 @@ public class MainScene extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("main-view.fxml"));
             /**FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
              Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-             //
+             ////
              **/
             stage.setTitle("JUDO COMPETITION MANAGER");
             Scene scene = new Scene(root);
