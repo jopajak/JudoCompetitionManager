@@ -7,9 +7,9 @@
     -fx-min-width: 600;
 }
 .button{
-    -fx-background-color: #3232BD;
-    -fx-font-size: 15;
+    -fx-background-color: #13226A;
     -fx-text-fill: #80D8F7;
+    -fx-font-size: 14;
     -fx-alignment: center;
 
 }
@@ -20,11 +20,11 @@
 }
 .text-field{
     -fx-background-color: #80D8F7;
-    -fx-text-fill: #3232BD;
+    -fx-text-fill: #13226A;
 }
 
 #iconLabel{
-    -fx-text-fill: #3232BD;
+    -fx-text-fill: #13226A;
     -fx-font-weight: bold;
     -fx-font-size: 20;
 }

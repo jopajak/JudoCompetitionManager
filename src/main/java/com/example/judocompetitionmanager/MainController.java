@@ -57,12 +57,10 @@ public class MainController {
             ex.printStackTrace();
         }
 
-        ContestantsController contestantController = loader.getController();
-
         stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         if (getClass().getResource("app.css") != null) {
-            scene.getStylesheets().add(getClass().getResource("def.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
         }
         stage.getIcons().add(new Image("icon.jpg"));
         stage.setScene((Scene) scene);

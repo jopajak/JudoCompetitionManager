@@ -6,12 +6,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.ContestantsController">
+<AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.ContestantsController">
    <children>
-      <TextArea fx:id="contestantsScene" cache="true" editable="false" layoutX="63.0" layoutY="99.0" onMouseClicked="#print" prefHeight="200.0" prefWidth="435.0" text="Jane&#10;Buddy&#10;Celina&#10;Jaquline&#10;Lola&#10;Ruby&#10;Rick&#10;Ed&#10;Jude&#10;Henry&#10;Guielermo&#10;Dorota&#10;Teresa" />
+      <TextArea fx:id="contestantsScene" cache="true" editable="false" layoutX="63.0" layoutY="99.0" onMouseClicked="#print" prefHeight="200.0" prefWidth="470.0" text="Jane&#10;Buddy&#10;Celina&#10;Jaquline&#10;Lola&#10;Ruby&#10;Rick&#10;Ed&#10;Jude&#10;Henry&#10;Guielermo&#10;Dorota&#10;Teresa" />
       <TextField layoutX="167.0" layoutY="45.0" />
       <Label layoutX="63.0" layoutY="49.0" text="Find someone" />
       <Label layoutX="241.0" layoutY="14.0" text="List of my contestants" />
-      <Button layoutX="357.0" layoutY="45.0" mnemonicParsing="false" text="Add a new contestant" />
+      <Button layoutX="373.0" layoutY="45.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="25.0" prefWidth="161.0" text="Add a new contestant" />
    </children>
 </AnchorPane>

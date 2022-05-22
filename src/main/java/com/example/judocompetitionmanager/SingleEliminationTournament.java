@@ -14,13 +14,13 @@ public class SingleEliminationTournament {
         ArrayList lista = new ArrayList();
 
         // inicjalizacja listy testowej
-        contestants0.add(new Contestant("Kyle", "M", 8));
-        contestants0.add(new Contestant("Malwina", "K", 12));
-        contestants0.add(new Contestant ("Edzia", "M", 11));
-        contestants0.add(new Contestant("Karl", "W", 10));
-        contestants0.add(new Contestant("Jack", "F", 9));
-        contestants0.add(new Contestant ("Thomas", "G", 14));
-        contestants0.add(new Contestant("Mikasa", "C", 15));
+        contestants0.add(new Contestant("Kyle", "M", 8, 50.0d));
+        contestants0.add(new Contestant("Malwina", "K", 12, 35.0d));
+        contestants0.add(new Contestant ("Edzia", "M", 11, 60.0d));
+        contestants0.add(new Contestant("Karl", "W", 10, 30.0d));
+        contestants0.add(new Contestant("Jack", "F", 9, 44.0d));
+        contestants0.add(new Contestant ("Thomas", "G", 14, 50.0d));
+        contestants0.add(new Contestant("Mikasa", "C", 15, 45.0d));
 
         //--------------PRZEMIESZANIE LISTY / LOSOWANIE---------------
         Random rand = new Random();

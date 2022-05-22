@@ -4,12 +4,21 @@ public class Contestant {
     private String name;
     private String surname;
     private int age;
+    private double weight;
     private int weightCategory;
 
-    public Contestant(String name, String surname, int age) {
+    public Contestant(String name, String surname, int age, double weight) {
         this.name = name;
         this.surname = surname;
         this.age = age;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public int getWeightCategory() {
+        return weightCategory;
     }
 
     public String getName() {
