@@ -1,12 +1,10 @@
 .root{
-    /*-fx-background-color: #7C0DCE;*/
     -fx-background-image: url("bcg.jpg");
     -fx-background-size: 100%;
     -fx-max-height: 400;
     -fx-max-width: 600;
     -fx-min-height: 400;
     -fx-min-width: 600;
-
 }
 .button{
     -fx-background-color: #3232BD;
@@ -24,10 +22,8 @@
     -fx-background-color: #80D8F7;
     -fx-text-fill: #3232BD;
 }
+
 #iconLabel{
-    /*-fx-text-fill: #7C0DCE;
-    #00008B
-     */
     -fx-text-fill: #3232BD;
     -fx-font-weight: bold;
     -fx-font-size: 20;

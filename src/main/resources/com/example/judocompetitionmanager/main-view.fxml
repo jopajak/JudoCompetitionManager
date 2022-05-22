@@ -15,5 +15,5 @@
     <Button onAction="#onHelloButtonClick" text="Hello!" />
    <Button mnemonicParsing="false" text="Ranking" />
    <Button mnemonicParsing="false" onAction="#onButtonClick" prefHeight="25.0" prefWidth="89.0" text="Contests" />
-   <Button mnemonicParsing="false" text="My contestants" />
+   <Button mnemonicParsing="false" onAction="#onMyContestantsClick" text="My contestants" />
 </VBox>

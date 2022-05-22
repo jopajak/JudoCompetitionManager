@@ -1,0 +1,8 @@
+.root {
+    -fx-background-color: grey;
+    -fx-text-fill: purple;
+}
+#contestantsScene {
+    -fx-text-fill: purple;
+    -fx-background-color: grey;
+}
