@@ -9,16 +9,31 @@
 
 }
 .button{
-    -fx-background-color: "purple";
+    -fx-background-color: #3232BD;
     -fx-font-size: 15;
-    -fx-text-fill: "white";
+    -fx-text-fill: #80D8F7;
     -fx-alignment: center;
 
 }
 .label{
-    -fx-text-fill: "white";
+    -fx-text-fill: #80D8F7;
     -fx-alignment: center;
+    -fx-font-size: 14;
+}
+.text-field{
+    -fx-background-color: #80D8F7;
+    -fx-text-fill: #3232BD;
 }
 #iconLabel{
-    -fx-text-fill: "yellow";
+    /*-fx-text-fill: #7C0DCE;
+    #00008B
+     */
+    -fx-text-fill: #3232BD;
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
 }
+#info{
+    -fx-text-fill: red;
+}
+
+
