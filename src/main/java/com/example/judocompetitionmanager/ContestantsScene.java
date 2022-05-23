@@ -9,20 +9,26 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class NewContestantScene extends Application {
+public class ContestantsScene extends Application {
 
 
-    public void start(Stage stage){
-        try{
-            Parent root = FXMLLoader.load(getClass().getResource("newContestant-view.fxml"));
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("contestants-view.fxml"));
             stage.setTitle("JUDO COMPETITION MANAGER");
             Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
+            if (getClass().getResource("app.css") != null) {
+                //scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
+            }
+
             stage.getIcons().add(new Image("icon.jpg"));
             stage.setScene(scene);
+            //stage.setOpacity(0.75);
             stage.show();
 
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
 
@@ -46,7 +52,4 @@ public class NewContestantScene extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
 }

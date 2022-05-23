@@ -6,30 +6,38 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class NewContestantController {
+public class ContestantsController {
 
+    private Stage stage;
     private Scene scene;
     private Parent root;
-    private Stage stage;
 
     @FXML
-    public void onClick(){
-        ;
+    TextArea contestantsScene;
+
+    public void print(ActionEvent e){
+        //contestantsScene.setText("seferg");
+        //System.out.println(contestantsScene.getText());
     }
-
-    public void addContestant(ActionEvent e){
-
-    }
-
     @FXML
-    public void switchToMainScene(ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
-        root = loader.load();
+    public void onAreaClick(ActionEvent e){
+
+    }
+
+    public void onAddClick(ActionEvent e) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("newContestant-view.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
         stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         if (getClass().getResource("app.css") != null) {
@@ -39,4 +47,6 @@ public class NewContestantController {
         stage.setScene((Scene) scene);
         stage.show();
     }
+
+
 }

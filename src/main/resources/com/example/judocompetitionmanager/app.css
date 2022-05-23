@@ -1,24 +1,35 @@
 .root{
-    /*-fx-background-color: #7C0DCE;*/
     -fx-background-image: url("bcg.jpg");
     -fx-background-size: 100%;
     -fx-max-height: 400;
     -fx-max-width: 600;
     -fx-min-height: 400;
     -fx-min-width: 600;
-
 }
 .button{
-    -fx-background-color: "purple";
-    -fx-font-size: 15;
-    -fx-text-fill: "white";
+    -fx-background-color: #13226A;
+    -fx-text-fill: #80D8F7;
+    -fx-font-size: 14;
     -fx-alignment: center;
 
 }
 .label{
-    -fx-text-fill: "white";
+    -fx-text-fill: #80D8F7;
     -fx-alignment: center;
+    -fx-font-size: 14;
 }
+.text-field{
+    -fx-background-color: #80D8F7;
+    -fx-text-fill: #13226A;
+}
+
 #iconLabel{
-    -fx-text-fill: "yellow";
+    -fx-text-fill: #13226A;
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
 }
+#info{
+    -fx-text-fill: red;
+}
+
+

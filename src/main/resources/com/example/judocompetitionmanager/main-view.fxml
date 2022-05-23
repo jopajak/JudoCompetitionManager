@@ -9,9 +9,11 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="316.0" text="Welcome Coach!" />
 
     <Label fx:id="welcomeText" />
     <Button onAction="#onHelloButtonClick" text="Hello!" />
-   <Button mnemonicParsing="false" onAction="#onButtonClick" prefHeight="25.0" prefWidth="89.0" text="Print" />
-   <Button mnemonicParsing="false" text="Button" />
+   <Button mnemonicParsing="false" text="Ranking" />
+   <Button mnemonicParsing="false" onAction="#onButtonClick" prefHeight="25.0" prefWidth="89.0" text="Contests" />
+   <Button mnemonicParsing="false" onAction="#onMyContestantsClick" text="My contestants" />
 </VBox>
