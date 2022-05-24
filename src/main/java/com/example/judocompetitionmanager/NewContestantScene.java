@@ -27,7 +27,6 @@ public class NewContestantScene extends Application {
         }
 
         stage.setOnCloseRequest(event -> {
-            //event.consume();
             logout(stage);
         });
 
