@@ -34,7 +34,7 @@ public class MainScene extends Application {
             if (getClass().getResource("app.css") != null) {
                 scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
             }
-            stage.getIcons().add(new Image("icon.jpg"));
+            //stage.getIcons().add(new Image("icon.jpg"));
             stage.setScene(scene);
             stage.show();
 
@@ -109,6 +109,5 @@ public class MainScene extends Application {
 
     public static void main(String[] args) {
         launch();
-        System.out.println("c4");
     }
 }

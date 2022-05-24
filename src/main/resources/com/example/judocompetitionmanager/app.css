@@ -11,7 +11,11 @@
     -fx-text-fill: #80D8F7;
     -fx-font-size: 14;
     -fx-alignment: center;
-
+}
+.radio-button{
+    -fx-text-fill: #80D8F7;
+    -fx-font-size: 14;
+    -fx-alignment: center;
 }
 .label{
     -fx-text-fill: #80D8F7;
@@ -30,6 +34,11 @@
 }
 #info{
     -fx-text-fill: red;
+}
+
+#contestantsScene {
+    -fx-text-fill: purple;
+    -fx-background-color: grey;
 }
 
 

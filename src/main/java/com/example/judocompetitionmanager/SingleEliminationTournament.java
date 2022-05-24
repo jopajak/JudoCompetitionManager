@@ -14,13 +14,13 @@ public class SingleEliminationTournament {
         ArrayList lista = new ArrayList();
 
         // inicjalizacja listy testowej
-        contestants0.add(new Contestant("Kyle", "M", 8, 50.0d));
-        contestants0.add(new Contestant("Malwina", "K", 12, 35.0d));
-        contestants0.add(new Contestant ("Edzia", "M", 11, 60.0d));
-        contestants0.add(new Contestant("Karl", "W", 10, 30.0d));
-        contestants0.add(new Contestant("Jack", "F", 9, 44.0d));
-        contestants0.add(new Contestant ("Thomas", "G", 14, 50.0d));
-        contestants0.add(new Contestant("Mikasa", "C", 15, 45.0d));
+        contestants0.add(new Contestant("Kyle", "M", 8, 50.0d, false));
+        contestants0.add(new Contestant("Malwina", "K", 12, 35.0d, false));
+        contestants0.add(new Contestant ("Edzia", "M", 11, 60.0d, false));
+        contestants0.add(new Contestant("Karl", "W", 10, 95.0d, true));
+        contestants0.add(new Contestant("Jack", "F", 9, 44.0d, true));
+        contestants0.add(new Contestant ("Thomas", "G", 14, 50.0d, true));
+        contestants0.add(new Contestant("Mikasa", "C", 15, 45.0d, false));
 
         //--------------PRZEMIESZANIE LISTY / LOSOWANIE---------------
         Random rand = new Random();
@@ -38,7 +38,7 @@ public class SingleEliminationTournament {
         }
         System.out.println("---------------------");
         for(int i = 0; i < contestants.size(); i++){
-            System.out.println(contestants.get(i).getName());
+            System.out.println(contestants.get(i).getName() + " " + contestants.get(i).getWeightCategory());
         }
 
         //----------------------------------------
