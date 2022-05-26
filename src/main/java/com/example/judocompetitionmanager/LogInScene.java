@@ -20,7 +20,7 @@ public class LogInScene extends Application {
             stage.setTitle("JUDO COMPETITION MANAGER");
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
-            stage.getIcons().add(new Image("icon.jpg"));
+            //stage.getIcons().add(new Image("icon.jpg"));
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

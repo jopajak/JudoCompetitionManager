@@ -9,9 +9,13 @@ import javafx.scene.control.ListView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class rankingController implements Initializable {
+public class RankingController implements Initializable {
 
-    String[] contestants = { "Me", "You", "Us", "Jane",
+    String[] contestants = {
+            "Me",
+            "You",
+            "Us",
+            "Jane",
             "Buddy",
             "Celina",
             "Jaquline",

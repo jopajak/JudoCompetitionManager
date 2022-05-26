@@ -12,7 +12,6 @@ public class SingleEliminationTournament {
         ArrayList<Contestant> contestants0 = new ArrayList<Contestant>();
         ArrayList<Contestant> contestants = new ArrayList<Contestant>();
         ArrayList<Contestant> winners = new ArrayList<Contestant>();
-        ArrayList lista = new ArrayList();
 
         // inicjalizacja listy testowej
         contestants0.add(new Contestant("Kyle", "M", 8, 50.0d, false));

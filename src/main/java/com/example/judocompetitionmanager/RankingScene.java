@@ -9,15 +9,18 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class rankingScene extends Application {
+public class RankingScene extends Application {
 
     public void start(Stage stage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("ranking-view.fxml"));
             stage.setTitle("JUDO COMPETITION MANAGER");
             Scene scene = new Scene(root);
+            if (getClass().getResource("app.css") != null) {
+                scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
+            }
             scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
-            stage.getIcons().add(new Image("icon.jpg"));
+            //stage.getIcons().add(new Image("icon.jpg"));
             stage.setScene(scene);
             stage.show();
 
