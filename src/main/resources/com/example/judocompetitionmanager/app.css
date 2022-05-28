@@ -29,11 +29,9 @@
 .list-view{
     -fx-background-color: #13226A;
     -fx-font-size: 12;
-    -fx-highlight-text-fill: #13226A;
-    -fx-border-color: #13226A;
 }
 .scroll-pane{
-    -fx-background-color: #80D8F7;
+    -fx-background-color: #13226A;
 }
 
 #iconLabel{
@@ -45,9 +43,15 @@
     -fx-text-fill: red;
 }
 
-#contestantsScene {
-    -fx-text-fill: purple;
-    -fx-background-color: grey;
+#bigLabel {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #80D8F7;
+}
+#mainLabel {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #13226A;
 }
 
 
