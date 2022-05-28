@@ -3,12 +3,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="556.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.NewContestantController">
+<AnchorPane prefHeight="400.0" prefWidth="556.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.NewContestantController">
    <children>
       <Label layoutX="52.0" layoutY="78.0" prefHeight="17.0" prefWidth="178.0" text="Name" />
       <Label layoutX="52.0" layoutY="117.0" prefHeight="17.0" prefWidth="178.0" text="Surname" />
@@ -22,14 +23,6 @@
          <effect>
             <InnerShadow />
          </effect></TextField>
-      <TextField fx:id="ageTextField" layoutX="233.0" layoutY="150.0" prefHeight="25.0" prefWidth="216.0">
-         <effect>
-            <InnerShadow />
-         </effect></TextField>
-      <TextField fx:id="weightTextField" layoutX="233.0" layoutY="188.0" prefHeight="25.0" prefWidth="216.0">
-         <effect>
-            <InnerShadow />
-         </effect></TextField>
       <Button layoutX="188.0" layoutY="336.0" mnemonicParsing="false" onAction="#addContestant" prefHeight="25.0" prefWidth="91.0" text="Add" />
       <Button layoutX="302.0" layoutY="336.0" mnemonicParsing="false" onAction="#switchToMainScene" prefHeight="25.0" prefWidth="91.0" text="Cancel" />
       <RadioButton fx:id="male" layoutX="206.0" layoutY="236.0" mnemonicParsing="false" selected="true" text="Male">
@@ -39,5 +32,13 @@
       </RadioButton>
       <RadioButton fx:id="female" layoutX="348.0" layoutY="236.0" mnemonicParsing="false" text="Female" toggleGroup="$sex" />
       <Label layoutX="52.0" layoutY="236.0" prefHeight="17.0" prefWidth="178.0" text="Sex" />
+      <Spinner fx:id="ageSpinner" editable="true" layoutX="232.0" layoutY="150.0" prefHeight="25.0" prefWidth="216.0">
+         <effect>
+            <InnerShadow />
+         </effect></Spinner>
+      <Spinner fx:id="weightSpinner" editable="true" layoutX="232.0" layoutY="188.0" prefHeight="25.0" prefWidth="216.0">
+         <effect>
+            <InnerShadow />
+         </effect></Spinner>
    </children>
 </AnchorPane>

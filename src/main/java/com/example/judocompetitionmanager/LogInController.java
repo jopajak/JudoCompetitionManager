@@ -44,13 +44,13 @@ public class LogInController {
             }
             //stage.getIcons().add(new Image("icon.jpg"));
             stage.setScene((Scene) scene);
+            stage.setResizable(false);
             stage.show();
         }
         else{
             info.setText("Your login or password is incorrect.");
         }
 
-
-        }
+    }
 
 }
