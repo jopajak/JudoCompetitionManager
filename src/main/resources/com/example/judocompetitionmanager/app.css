@@ -26,6 +26,15 @@
     -fx-background-color: #80D8F7;
     -fx-text-fill: #13226A;
 }
+.list-view{
+    -fx-background-color: #13226A;
+    -fx-font-size: 12;
+    -fx-highlight-text-fill: #13226A;
+    -fx-border-color: #13226A;
+}
+.scroll-pane{
+    -fx-background-color: #80D8F7;
+}
 
 #iconLabel{
     -fx-text-fill: #13226A;

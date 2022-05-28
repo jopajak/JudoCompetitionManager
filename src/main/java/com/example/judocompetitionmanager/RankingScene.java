@@ -9,28 +9,28 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+public class RankingScene extends Application {
 
-public class LogInScene extends Application {
-
-    public void start(Stage stage){
-        Parent root = null;
+    public void start(Stage stage) {
         try {
-            root = FXMLLoader.load(getClass().getResource("logIn-view.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("ranking-view.fxml"));
             stage.setTitle("JUDO COMPETITION MANAGER");
             Scene scene = new Scene(root);
+            if (getClass().getResource("app.css") != null) {
+                scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
+            }
             scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
             //stage.getIcons().add(new Image("icon.jpg"));
             stage.setScene(scene);
             stage.show();
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         stage.setOnCloseRequest(event -> {
             logout(stage);
-                } );
-
+        });
     }
 
     public void logout(Stage stage) {
@@ -46,8 +46,4 @@ public class LogInScene extends Application {
         }
     }
 
-
-    public static void main(String[] args) {
-        launch();
-    }
 }

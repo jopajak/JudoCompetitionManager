@@ -6,12 +6,12 @@ import java.util.Random;
 public class SingleEliminationTournament {
 
     //konstruktor z pobraną z bazy listą zaowdników
+    //sprawdzenie czy wszyscy zawodnicy z listy maja taką samą kat. wagową (bez wiekowej)
 
     public static void main(String[] args) {
         ArrayList<Contestant> contestants0 = new ArrayList<Contestant>();
         ArrayList<Contestant> contestants = new ArrayList<Contestant>();
         ArrayList<Contestant> winners = new ArrayList<Contestant>();
-        ArrayList lista = new ArrayList();
 
         // inicjalizacja listy testowej
         contestants0.add(new Contestant("Kyle", "M", 8, 50.0d, false));

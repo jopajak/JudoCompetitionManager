@@ -20,10 +20,10 @@ public class ContestantsScene extends Application {
             stage.setTitle("JUDO COMPETITION MANAGER");
             Scene scene = new Scene(root);
             if (getClass().getResource("app.css") != null) {
-                //scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
             }
 
-            stage.getIcons().add(new Image("icon.jpg"));
+            //stage.getIcons().add(new Image("icon.jpg"));
             stage.setScene(scene);
             //stage.setOpacity(0.75);
             stage.show();
@@ -33,7 +33,6 @@ public class ContestantsScene extends Application {
         }
 
         stage.setOnCloseRequest(event -> {
-            //event.consume();
             logout(stage);
         });
 

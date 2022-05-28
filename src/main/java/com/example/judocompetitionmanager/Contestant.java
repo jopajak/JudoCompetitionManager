@@ -7,6 +7,7 @@ public class Contestant {
     private double weight;
     private Boolean sex;              // sex, female = false, male = true
     private String weightCategory;
+    private int points;
 
     public Contestant(String name, String surname, int age, double weight, Boolean sex) {
         this.name = name;
@@ -18,6 +19,13 @@ public class Contestant {
     }
 
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getPoints() {
+        return points;
+    }
 
     private void assignToWeightCat(Double weight){
         if(sex == true) {
