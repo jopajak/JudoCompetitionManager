@@ -77,15 +77,10 @@ public class RankingController implements Initializable {
                 weightCategoryLabel.setText(currentContestant.getWeightCategory());
                 weightLabel.setText(String.valueOf(currentContestant.getWeight() + "kg"));
                 pointsLabel.setText("Points: " + String.valueOf(currentContestant.getPoints()));
-                System.out.println(currentContestant);
 
             }
         });
 
-    }
-
-    public void showProfile(){
-        ;
     }
 
     public void goBack(MouseEvent mouseEvent) {
