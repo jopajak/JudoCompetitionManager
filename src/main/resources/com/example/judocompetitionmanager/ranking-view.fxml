@@ -10,12 +10,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.RankingController">
    <children>
-      <ScrollPane layoutX="69.0" layoutY="109.0">
+      <ScrollPane layoutX="49.0" layoutY="110.0">
          <content>
-            <ListView fx:id="rankingList" prefHeight="234.0" prefWidth="460.0" />
+            <ListView fx:id="rankingList" prefHeight="234.0" prefWidth="341.0" />
          </content>
       </ScrollPane>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" prefHeight="17.0" prefWidth="600.0" text="Ranking of contestants">
+      <Label fx:id="bigLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" prefHeight="17.0" prefWidth="600.0" text="Ranking of contestants">
          <font>
             <Font size="24.0" />
          </font>
@@ -26,5 +26,11 @@
             <Image url="@go-back.png" />
          </image>
       </ImageView>
+      <Label fx:id="nameLabel" layoutX="391.0" layoutY="132.0" prefHeight="17.0" prefWidth="208.0" />
+      <Label fx:id="ageLabel" layoutX="391.0" layoutY="168.0" prefHeight="17.0" prefWidth="208.0" />
+      <Label fx:id="weightCategoryLabel" layoutX="391.0" layoutY="220.0" prefHeight="17.0" prefWidth="208.0" />
+      <Label fx:id="pointsLabel" layoutX="391.0" layoutY="270.0" prefHeight="17.0" prefWidth="208.0" />
+      <Label fx:id="weightLabel" layoutX="391.0" layoutY="237.0" prefHeight="17.0" prefWidth="208.0" />
+      <Label fx:id="sexLabel" layoutX="391.0" layoutY="185.0" prefHeight="17.0" prefWidth="208.0" />
    </children>
 </AnchorPane>

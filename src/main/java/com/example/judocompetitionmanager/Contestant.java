@@ -18,6 +18,17 @@ public class Contestant {
         assignToWeightCat(weight);
     }
 
+    @Override
+    public String toString() {
+        return  name + " " +
+                surname + "   " +
+                //weight + "kg " +
+                //sex + " " +
+                //"age: " +
+                age + " " +
+                weightCategory + ' ' +
+                ", points=" + points + " ";
+    }
 
     public void setPoints(int points) {
         this.points = points;
@@ -68,6 +79,13 @@ public class Contestant {
 
     public Boolean getSex() {
         return sex;
+    }
+    public String getSexString() {
+        if (this.getSex() == true){
+            return "male";
+        }else {
+            return "female";
+        }
     }
 
     public double getWeight() {
