@@ -80,6 +80,7 @@ public class Contestant {
     public Boolean getSex() {
         return sex;
     }
+
     public String getSexString() {
         if (this.getSex() == true){
             return "male";

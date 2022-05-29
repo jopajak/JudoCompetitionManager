@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,9 +27,9 @@ public class ContestantsController implements Initializable {
     private Parent root;
     private Contestant currentContestant;
     private String currentName;
-
     @FXML
     private ListView contestantsList;
+
 
     public void onAddClick(ActionEvent e) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("newContestant-view.fxml"));
@@ -48,12 +49,26 @@ public class ContestantsController implements Initializable {
         stage.show();
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<Contestant> contestants = new ArrayList<>();
-        contestants.add(new Contestant("Jack", "Dena", 25, 90.0, true));
-        contestants.add(new Contestant("Roman", "Kowalski", 26, 86.0, true));
+
+        //contestants.add(new Contestant("Jack", "Dena", 25, 90.0, true));
+        //contestants.add(new Contestant("Roman", "Kowalski", 26, 86.0, true));
+
+        Database db = Database.getInstance();
+
+
+
+        Contestant con = null;
+        try {
+            con = db.getContestant("Joanna");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        contestants.add(con);
+
+
 
         contestantsList.getItems().addAll(contestants);
         contestantsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
@@ -65,7 +80,6 @@ public class ContestantsController implements Initializable {
                 System.out.println(currentName);
             }
         });
-
 
     }
 
@@ -82,7 +96,7 @@ public class ContestantsController implements Initializable {
             scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
         }
         //stage.getIcons().add(new Image("icon.jpg"));
-        stage.setScene((Scene) scene);
+        stage.setScene(scene);
         stage.show();
     }
 }

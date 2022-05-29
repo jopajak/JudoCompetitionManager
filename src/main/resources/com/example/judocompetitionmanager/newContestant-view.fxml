@@ -9,7 +9,7 @@
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="556.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.NewContestantController">
+<AnchorPane prefHeight="400.0" prefWidth="556.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.NewContestantController">
    <children>
       <Label layoutX="52.0" layoutY="78.0" prefHeight="17.0" prefWidth="178.0" text="Name" />
       <Label layoutX="52.0" layoutY="117.0" prefHeight="17.0" prefWidth="178.0" text="Surname" />
@@ -23,8 +23,14 @@
          <effect>
             <InnerShadow />
          </effect></TextField>
-      <Button layoutX="188.0" layoutY="336.0" mnemonicParsing="false" onAction="#addContestant" prefHeight="25.0" prefWidth="91.0" text="Add" />
-      <Button layoutX="302.0" layoutY="336.0" mnemonicParsing="false" onAction="#switchToMainScene" prefHeight="25.0" prefWidth="91.0" text="Cancel" />
+      <Button layoutX="188.0" layoutY="336.0" mnemonicParsing="false" onAction="#addContestant" prefHeight="25.0" prefWidth="91.0" text="Add">
+         <effect>
+            <InnerShadow />
+         </effect></Button>
+      <Button layoutX="302.0" layoutY="336.0" mnemonicParsing="false" onAction="#switchToMainScene" prefHeight="25.0" prefWidth="91.0" text="Cancel">
+         <effect>
+            <InnerShadow />
+         </effect></Button>
       <RadioButton fx:id="male" layoutX="206.0" layoutY="236.0" mnemonicParsing="false" selected="true" text="Male">
          <toggleGroup>
             <ToggleGroup fx:id="sex" />

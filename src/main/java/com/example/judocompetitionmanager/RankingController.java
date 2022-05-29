@@ -26,6 +26,8 @@ public class RankingController implements Initializable {
     private Contestant currentContestant;
 
 
+
+
     String[] contestants1 = {
             "Me",
             "You",
