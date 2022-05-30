@@ -12,25 +12,29 @@ public class Testing {
 
         Database db = Database.getInstance();
         JSONObject jsonObj = new JSONObject();
-        db.writeJsonObject("Competitions", jsonObj);
+        db.writeJsonObject("competitors", jsonObj);
 
-        JSONObject competitions = db.readJsonObject("Competitions");
+        JSONObject competitors = db.readJsonObject("competitors");
 
-        List<String> list = Arrays.asList("KT", "ad", "dawed", "mad", "kot", "dawe");
-        List<String> list2 = Arrays.asList("AGH", "14", "medium", "Krk", "23", "Judo");
+        List<String> list = Arrays.asList("Kuba", "Woje", "12", "78", "true", "M");
+        List<String> list2 = Arrays.asList("Kuba1", "Woje2", "123", "78", "true", "M");
 
-        JSONObject jo = db.jsonify_competition(list);
-        JSONObject jox = db.jsonify_competition(list);
+        JSONObject jo = db.jsonify_contestant(list);
+        JSONObject jox = db.jsonify_contestant(list);
 
-        competitions.put("Competition1", jo);
-        competitions.put("Competition2", jox);
+        competitors.put("Competitor1", jo);
+        competitors.put("CompetitorKuba", jox);
 
-        db.writeJsonObject("Competitions", competitions);
+        db.writeJsonObject("competitors", competitors);
 
-        JSONObject jo2 = db.readJsonObject("Competitions");
+        JSONObject jo2 = db.readJsonObject("competitors");
+        System.out.println(jo2);
+        List list23 = db.getCompetitorsList();
 
-        String name = jo2.getJSONObject("Competition1").getString("name");
-        System.out.println(name);
+        System.out.println(list23);
+
+
+
 
         Database.close();
 
