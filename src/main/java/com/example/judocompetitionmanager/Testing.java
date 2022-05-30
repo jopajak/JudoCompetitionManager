@@ -36,14 +36,6 @@ public class Testing {
 
 
 
-        Contestant kuba = new Contestant("Kuba", "Dober", 25, 60, true);
-        db.addContestant(kuba);
-
-        Competition com1 = new Competition("Com1", "24.05.2021", "25.05.2021", "www", "krakowska", "rusz");
-        db.addCompetition(com1);
-
-        Contestant kuba2 = db.getContestant("Kuba");
-        System.out.println(kuba2.getSurname());
         Database.close();
 
     }

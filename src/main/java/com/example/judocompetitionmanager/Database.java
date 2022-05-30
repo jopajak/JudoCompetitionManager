@@ -10,9 +10,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -293,6 +291,27 @@ public final class Database {
                 return new JSONObject();
             }
         }
+    }
+
+    public List getCompetitorsList() throws JSONException {
+        List list = new ArrayList<>();
+        JSONObject competitors = readJsonObject("competitors");
+        Iterator<String> keys = competitors.keys();
+
+        while(keys.hasNext()) {
+            String key = keys.next();
+
+            JSONObject competitor = (JSONObject) competitors.get(key);
+            List<String> singleCompetitor = new ArrayList<>();
+            singleCompetitor.add((String) competitor.get("name"));
+            singleCompetitor.add((String) competitor.get("surname"));
+            singleCompetitor.add((String) competitor.get("age"));
+            singleCompetitor.add((String) competitor.get("weight"));
+            singleCompetitor.add((String) competitor.get("sex"));
+            singleCompetitor.add((String) competitor.get("weightCategory"));
+            list.add(singleCompetitor);
+        }
+        return list;
     }
 
     /**
