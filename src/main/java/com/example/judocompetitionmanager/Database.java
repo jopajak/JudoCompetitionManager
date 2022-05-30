@@ -242,11 +242,13 @@ public final class Database {
         jo.put("weight", list.get(3));
         jo.put("sex", list.get(4));
         jo.put("weightCategory", list.get(5));
+        System.out.println(jo);
         return jo;
     }
 
     public void addContestant(Contestant contestant) throws JSONException {
         List<String> list = Arrays.asList(contestant.getName(), contestant.getSurname(), Integer.toString(contestant.getAge()), Double.toString(contestant.getWeight()), Boolean.toString(contestant.getSex()), contestant.getWeightCategory());
+        System.out.println(list);
         JSONObject contestants = readJsonObject("Contestants");
         delete("Contestants");
         JSONObject jo = jsonify_contestant(list);
@@ -304,7 +306,7 @@ public final class Database {
 
     public List getCompetitorsList() throws JSONException {
         List list = new ArrayList<>();
-        JSONObject competitors = readJsonObject("competitors");
+        JSONObject competitors = readJsonObject("Contestants");
         Iterator<String> keys = competitors.keys();
 
         while(keys.hasNext()) {
