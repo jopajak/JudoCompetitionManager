@@ -245,6 +245,15 @@ public final class Database {
         return jo;
     }
 
+    public void addContestant(Contestant contestant) throws JSONException {
+        List<String> list = Arrays.asList(contestant.getName(), contestant.getSurname(), Integer.toString(contestant.getAge()), Double.toString(contestant.getWeight()), Boolean.toString(contestant.getSex()), contestant.getWeightCategory());
+        JSONObject contestants = readJsonObject("Contestants");
+        delete("Contestants");
+        JSONObject jo = jsonify_contestant(list);
+        contestants.put(contestant.getName(), jo);
+        writeJsonObject("Contestants", contestants);
+    }
+
 
     /**
      * Checks for the existence of data under a given key.
