@@ -304,25 +304,24 @@ public final class Database {
         }
     }
 
-    public List getCompetitorsList() throws JSONException {
-        List list = new ArrayList<>();
+    public List<Contestant> getCompetitorsList() throws JSONException {
+        List<Contestant> contestantsList = new ArrayList<>();
         JSONObject competitors = readJsonObject("Contestants");
         Iterator<String> keys = competitors.keys();
 
         while(keys.hasNext()) {
             String key = keys.next();
-
             JSONObject competitor = (JSONObject) competitors.get(key);
-            List<String> singleCompetitor = new ArrayList<>();
-            singleCompetitor.add((String) competitor.get("name"));
-            singleCompetitor.add((String) competitor.get("surname"));
-            singleCompetitor.add((String) competitor.get("age"));
-            singleCompetitor.add((String) competitor.get("weight"));
-            singleCompetitor.add((String) competitor.get("sex"));
-            singleCompetitor.add((String) competitor.get("weightCategory"));
-            list.add(singleCompetitor);
+
+            String name = competitor.getString("name");
+            String surname = competitor.getString("surname");
+            int age = competitor.getInt("age");
+            double weight = competitor.getDouble("weight");
+            boolean sex = competitor.getBoolean("sex");
+            Contestant contestant = new Contestant(name, surname, age, weight, sex);
+            contestantsList.add(contestant);
         }
-        return list;
+        return contestantsList;
     }
 
     /**

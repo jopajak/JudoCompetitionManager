@@ -62,28 +62,30 @@ public class RankingController implements Initializable {
 
 
         Database db = Database.getInstance();
-        List list = null;
+        List<Contestant> list = null;
         try {
             list = db.getCompetitorsList();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        System.out.println(list);
+
+//           for (int i = 0; i < Objects.requireNonNull(list).size(); i ++){
+//                System.out.println(i);
+//                //System.out.println(list.get(i).getClass());
+//                currrent = (ArrayList) list.get(i);
+//
+//                name = String.valueOf(currrent.get(0));
+//                surname = String.valueOf(currrent.get(1));
+//                age = (int)(currrent.get(2));
+//                weight = (Double)currrent.get(3);
+//                sex = (boolean)currrent.get(4);
+//                contestants.add(new Contestant(name, surname, age, weight, sex));
+//
+//            }
 
 
-           /* for (int i = 0; i < Objects.requireNonNull(list).size(); i ++){
-                System.out.println(list.get(i).getClass());
-                currrent = (ArrayList) list.get(i);
-
-                name = String.valueOf(currrent.get(0));
-                surname = String.valueOf(currrent.get(1));
-                age = (int)(currrent.get(2));
-                weight = (Double)currrent.get(3);
-                sex = (boolean)currrent.get(4);
-                contestants.add(new Contestant(name, surname, age, weight, sex));
-            }
-
-            */
 
 
         //System.out.println(name);
