@@ -7,14 +7,10 @@ import org.iq80.leveldb.Options;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,9 +41,6 @@ public final class Database {
         options.compressionType(CompressionType.NONE);
         try {
             db = factory.open(new File(FILENAME), options);
-            JSONObject jsonObj = new JSONObject();
-            writeJsonObject("Competitions", jsonObj);
-            writeJsonObject("Contestants", jsonObj);
             LOGGER.log(Level.INFO, "DB initialized successfully");
             LOGGER.log(Level.INFO, "directory: {0}", getFilename());
             LOGGER.log(Level.INFO, "cache: {0} MiB", getCacheSize());
@@ -252,38 +245,6 @@ public final class Database {
         return jo;
     }
 
-    public void addContestant(Contestant contestant) throws JSONException {
-        List<String> list = Arrays.asList(contestant.getName(), contestant.getSurname(), Integer.toString(contestant.getAge()), Double.toString(contestant.getWeight()), Boolean.toString(contestant.getSex()), contestant.getWeightCategory());
-        JSONObject contestants = readJsonObject("Contestants");
-        delete("Contestants");
-        JSONObject jo = jsonify_contestant(list);
-        contestants.put(contestant.getName(), jo);
-        writeJsonObject("Contestants", contestants);
-    }
-
-    public void addCompetition(Competition competition) throws JSONException {
-        List<String> list = Arrays.asList(competition.getName(), competition.getStartDate(), competition.getEndDate(), competition.getCompetitionWebsite(), competition.getOrganizer(), competition.getAddress());
-        JSONObject competitions = readJsonObject("Competitions");
-        delete("Competitions");
-        JSONObject jo = jsonify_competition(list);
-        competitions.put(competition.getName(), jo);
-        writeJsonObject("Competitions",competitions);
-    }
-
-    public Contestant getContestant(String contestant_name) throws JSONException {
-        JSONObject contestants = readJsonObject("Contestants");
-        JSONParser jsonParser = new JSONParser();
-        JSONObject jo = (JSONObject) contestants.get(contestant_name);
-        String name = (String) jo.get("name");
-        String surname = (String) jo.get("surname");
-        int age = Integer.parseInt((String)jo.get("age"));
-        Double weight = Double.parseDouble((String)jo.get("age"));
-        boolean sex = Boolean.parseBoolean((String)jo.get("sex"));
-
-        Contestant contestant = new Contestant(name, surname, age, weight, sex);
-        return contestant;
-    }
-
 
     /**
      * Checks for the existence of data under a given key.
@@ -330,6 +291,27 @@ public final class Database {
                 return new JSONObject();
             }
         }
+    }
+
+    public List getCompetitorsList() throws JSONException {
+        List list = new ArrayList<>();
+        JSONObject competitors = readJsonObject("competitors");
+        Iterator<String> keys = competitors.keys();
+
+        while(keys.hasNext()) {
+            String key = keys.next();
+
+            JSONObject competitor = (JSONObject) competitors.get(key);
+            List<String> singleCompetitor = new ArrayList<>();
+            singleCompetitor.add((String) competitor.get("name"));
+            singleCompetitor.add((String) competitor.get("surname"));
+            singleCompetitor.add((String) competitor.get("age"));
+            singleCompetitor.add((String) competitor.get("weight"));
+            singleCompetitor.add((String) competitor.get("sex"));
+            singleCompetitor.add((String) competitor.get("weightCategory"));
+            list.add(singleCompetitor);
+        }
+        return list;
     }
 
     /**

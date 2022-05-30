@@ -10,7 +10,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.json.JSONException;
 
 import java.io.IOException;
 
@@ -33,7 +32,8 @@ public class NewContestantController {
     @FXML
     private RadioButton female;
 
-    public void addContestant(ActionEvent e) throws IOException, JSONException {
+
+    public void addContestant(ActionEvent e) throws IOException{
         String name = nameTextField.getText();
         String surname = surnameTextField.getText();
 
@@ -58,8 +58,6 @@ public class NewContestantController {
             Contestant newOne = new Contestant(name, surname, age, weight, sex);
             System.out.println(newOne.getName() + " " + newOne.getSurname());
 
-            Database db = Database.getInstance();
-            db.addContestant(newOne);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("contestants-view.fxml"));
             root = loader.load();
