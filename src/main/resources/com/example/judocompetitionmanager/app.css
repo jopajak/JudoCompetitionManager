@@ -27,11 +27,14 @@
     -fx-text-fill: #13226A;
 }
 .list-view{
-    -fx-background-color: #13226A;
     -fx-font-size: 12;
 }
 .scroll-pane{
-    -fx-background-color: #13226A;
+}
+.list-view .list-cell{
+    -fx-control-inner-background: #13226A;
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 50%);
+    -fx-text-fill: #80D8F7;
 }
 
 #iconLabel{
@@ -41,12 +44,6 @@
 }
 #info{
     -fx-text-fill: red;
-}
-
-.list-view .list-cell{
-    -fx-control-inner-background: #13226A;
-    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 50%);
-    -fx-text-fill: #80D8F7;
 }
 
 #bigLabel {

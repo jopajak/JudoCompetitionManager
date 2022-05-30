@@ -17,6 +17,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -51,26 +52,36 @@ public class ContestantsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<Contestant> contestants = new ArrayList<>();
-
-        //contestants.add(new Contestant("Jack", "Dena", 25, 90.0, true));
-        //contestants.add(new Contestant("Roman", "Kowalski", 26, 86.0, true));
 
         Database db = Database.getInstance();
-
-
-
-        Contestant con = null;
         try {
-            con = db.getContestant("Joanna");
+            db.addContestant(new Contestant("Jake", "sdvvf", 12, 40.0, true));
+            db.addContestant(new Contestant("Jahgnfg", "sdvvf", 12, 40.0, true));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        contestants.add(con);
+        List competitors = null;
+        try {
+            competitors = db.getCompetitorsList();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(competitors);
 
+        try {
+            //competitors = db.getCompetitorsList();
 
+            competitors = (ArrayList<Contestant>) db.getCompetitorsList();
+            for(int i = 0; i < competitors.size(); i++){
+                //contestants.add(competitors(i));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        contestantsList.getItems().addAll(contestants);
+        ArrayList<Contestant> list = new ArrayList<>();
+        list.add(new Contestant("Jake", "sdvvf", 12, 40.0, true));
+        contestantsList.getItems().addAll(list);
         contestantsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {

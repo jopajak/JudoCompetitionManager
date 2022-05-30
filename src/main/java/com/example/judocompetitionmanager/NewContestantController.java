@@ -7,11 +7,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -57,8 +59,14 @@ public class NewContestantController implements Initializable {
             }
 
             Contestant newOne = new Contestant(name, surname, age, weight, sex);
-            System.out.println("New contestant added successfully!");
 
+            Database db = Database.getInstance();
+            try {
+                db.addContestant(newOne);
+                System.out.println("New contestant added successfully!");
+            } catch (JSONException ex) {
+                ex.printStackTrace();
+            }
 
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("contestants-view.fxml"));

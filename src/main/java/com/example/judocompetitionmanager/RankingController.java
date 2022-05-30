@@ -12,10 +12,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
+import org.json.JSONException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class RankingController implements Initializable {
@@ -24,24 +26,12 @@ public class RankingController implements Initializable {
     private Parent root;
     private Scene scene;
     private Contestant currentContestant;
-
-
-
-
-    String[] contestants1 = {
-            "Me",
-            "You",
-            "Us",
-            "Jane",
-            "Buddy",
-            "Celina",
-            "Jaquline",
-            "Lola",
-            "Ruby",
-            "Rick",
-            "Ed",
-            "Jude",
-            "Henry"};
+    String name;
+    String surname;
+    int age;
+    double weight;
+    boolean sex;
+    ArrayList currrent=new ArrayList();
 
     @FXML
     public ListView rankingList;
@@ -62,10 +52,43 @@ public class RankingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<Contestant> contestants = new ArrayList<>();
+
         contestants.add(new Contestant("Jack", "Dsfg", 25, 90.0, true));
+        /**
         contestants.add(new Contestant("Mike", "Jesf", 26, 86.3, true));
         contestants.add(new Contestant("Jane", "Teaf", 24, 67.5, false));
+         **/
 
+
+
+        Database db = Database.getInstance();
+        List list = null;
+        try {
+            list = db.getCompetitorsList();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+           /* for (int i = 0; i < Objects.requireNonNull(list).size(); i ++){
+                System.out.println(list.get(i).getClass());
+                currrent = (ArrayList) list.get(i);
+
+                name = String.valueOf(currrent.get(0));
+                surname = String.valueOf(currrent.get(1));
+                age = (int)(currrent.get(2));
+                weight = (Double)currrent.get(3);
+                sex = (boolean)currrent.get(4);
+                contestants.add(new Contestant(name, surname, age, weight, sex));
+            }
+
+            */
+
+
+        //System.out.println(name);
+
+        System.out.println(contestants + "-----------------------");
 
         rankingList.getItems().addAll(contestants);
         rankingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
@@ -73,7 +96,7 @@ public class RankingController implements Initializable {
             public void changed(ObservableValue observableValue, Object o, Object t1) {
                 currentContestant = (Contestant) rankingList.getSelectionModel().getSelectedItem();
 
-                nameLabel.setText( currentContestant.getName() + " " + currentContestant.getSurname() );
+                nameLabel.setText(currentContestant.getName() + " " + currentContestant.getSurname() );
                 ageLabel.setText(String.valueOf(currentContestant.getAge()));
                 sexLabel.setText(currentContestant.getSexString());
                 weightCategoryLabel.setText(currentContestant.getWeightCategory());
