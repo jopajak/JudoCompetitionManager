@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class MainController {
 
@@ -31,12 +32,7 @@ public class MainController {
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
-
-    @FXML
-    public void onButtonClick(ActionEvent e) {
-        System.out.println("Print");
+        welcomeText.setText("Hajime!");
     }
 
     @FXML
@@ -50,16 +46,28 @@ public class MainController {
         stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         if (getClass().getResource("app.css") != null) {
-            scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("app.css")).toExternalForm());
         }
-        //stage.getIcons().add(new Image("icon.jpg"));
-        stage.setScene((Scene) scene);
+        stage.setScene(scene);
         stage.show();
     }
 
     @FXML
     public void onContestsClick(ActionEvent e) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("contests-view.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
+        stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        if (getClass().getResource("app.css") != null) {
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("app.css")).toExternalForm());
+        }
+        stage.setScene(scene);
+        stage.show();
     }
     @FXML
     public void onMyContestantsClick(ActionEvent e) {
@@ -73,10 +81,9 @@ public class MainController {
         stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         if (getClass().getResource("app.css") != null) {
-            scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("app.css")).toExternalForm());
         }
-        //stage.getIcons().add(new Image("icon.jpg"));
-        stage.setScene((Scene) scene);
+        stage.setScene(scene);
         stage.show();
     }
 

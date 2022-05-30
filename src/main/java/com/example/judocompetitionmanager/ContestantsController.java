@@ -12,10 +12,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -26,9 +28,9 @@ public class ContestantsController implements Initializable {
     private Parent root;
     private Contestant currentContestant;
     private String currentName;
-
     @FXML
     private ListView contestantsList;
+
 
     public void onAddClick(ActionEvent e) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("newContestant-view.fxml"));
@@ -48,14 +50,38 @@ public class ContestantsController implements Initializable {
         stage.show();
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<Contestant> contestants = new ArrayList<>();
-        contestants.add(new Contestant("Jack", "Dena", 25, 90.0, true));
-        contestants.add(new Contestant("Roman", "Kowalski", 26, 86.0, true));
 
-        contestantsList.getItems().addAll(contestants);
+        Database db = Database.getInstance();
+        try {
+            db.addContestant(new Contestant("Jake", "sdvvf", 12, 40.0, true));
+            db.addContestant(new Contestant("Jahgnfg", "sdvvf", 12, 40.0, true));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        List competitors = null;
+        try {
+            competitors = db.getCompetitorsList();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(competitors);
+
+        try {
+            //competitors = db.getCompetitorsList();
+
+            competitors = (ArrayList<Contestant>) db.getCompetitorsList();
+            for(int i = 0; i < competitors.size(); i++){
+                //contestants.add(competitors(i));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Contestant> list = new ArrayList<>();
+        list.add(new Contestant("Jake", "sdvvf", 12, 40.0, true));
+        contestantsList.getItems().addAll(list);
         contestantsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
@@ -65,7 +91,6 @@ public class ContestantsController implements Initializable {
                 System.out.println(currentName);
             }
         });
-
 
     }
 
@@ -82,7 +107,7 @@ public class ContestantsController implements Initializable {
             scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
         }
         //stage.getIcons().add(new Image("icon.jpg"));
-        stage.setScene((Scene) scene);
+        stage.setScene(scene);
         stage.show();
     }
 }

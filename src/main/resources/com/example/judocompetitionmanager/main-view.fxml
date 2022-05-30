@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" prefHeight="335.0" prefWidth="336.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.MainController">
@@ -13,8 +14,20 @@
    <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="316.0" text="Welcome Coach!" />
 
     <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="Hello!" />
-   <Button mnemonicParsing="false" onAction="#onRankingClick" text="Ranking" />
-   <Button mnemonicParsing="false" onAction="#onButtonClick" prefHeight="25.0" prefWidth="89.0" text="Contests" />
-   <Button mnemonicParsing="false" onAction="#onMyContestantsClick" text="My contestants" />
+    <Button onAction="#onHelloButtonClick" text="Hello!">
+      <effect>
+         <InnerShadow />
+      </effect></Button>
+   <Button mnemonicParsing="false" onAction="#onRankingClick" text="Ranking">
+      <effect>
+         <InnerShadow />
+      </effect></Button>
+   <Button mnemonicParsing="false" onAction="#onContestsClick" prefHeight="25.0" prefWidth="89.0" text="Contests">
+      <effect>
+         <InnerShadow />
+      </effect></Button>
+   <Button mnemonicParsing="false" onAction="#onMyContestantsClick" text="My contestants">
+      <effect>
+         <InnerShadow />
+      </effect></Button>
 </VBox>
