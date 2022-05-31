@@ -49,6 +49,7 @@ public class RankingController implements Initializable {
         Contestant current;
         ArrayList<Contestant> contestants = new ArrayList<>();
 
+
         //pobranie instancji kasy Database (singleton)
         Database db = Database.getInstance();
         List contestantList = null;
@@ -58,8 +59,27 @@ public class RankingController implements Initializable {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(contestantList.get(0));
+
+
+
         int size = contestantList.size();
+
+        ArrayList<String> mojaLista= new ArrayList<String>();
+        for (int i = 0; i < size; i++) {
+            mojaLista= (ArrayList<String>) contestantList.get(i);
+            System.out.println(mojaLista);
+
+            name = String.valueOf(mojaLista.get(0));
+            surname = String.valueOf(mojaLista.get(1));
+            age = String.valueOf(mojaLista.get(2));
+            weight = String.valueOf(mojaLista.get(3));
+            sex = String.valueOf(mojaLista.get(4));
+            Contestant newOne = new Contestant(name, surname, Integer.parseInt(age), Double.parseDouble(weight), Boolean.valueOf(sex));
+            System.out.println(newOne);
+            contestants.add(newOne);
+        }
+
+
 
 /*
         for (int i = 0; i < size; i++) {
@@ -79,17 +99,18 @@ public class RankingController implements Initializable {
 
          */
 
-        contestants.add(new Contestant("Jan", "sfv", 34, 40.0, true));
-        contestants.add(new Contestant("Jang", "sfv", 34, 40.0, false));
-        System.out.println(contestants.get(0));
+        //contestants.add(new Contestant("Jan", "sfv", 34, 40.0, true));
+        //contestants.add(new Contestant("Jang", "sfv", 34, 40.0, false));
+        //System.out.println(contestants.get(0));
 
 
-        rankingList.getItems().addAll(contestantList);
+        rankingList.getItems().addAll(contestants);
+        currentContestant = rankingList.getSelectionModel().getSelectedItem();
         rankingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
                 if(currentContestant != null) {
-                    System.out.println(currentContestant);
+                    System.out.println(currentContestant + "00000");
                     currentContestant = (Contestant) rankingList.getSelectionModel().getSelectedItem();
 
                     nameLabel.setText(currentContestant.getName() + " " + currentContestant.getSurname());
@@ -98,6 +119,8 @@ public class RankingController implements Initializable {
                     weightCategoryLabel.setText(currentContestant.getWeightCategory());
                     weightLabel.setText(String.valueOf(currentContestant.getWeight() + "kg"));
                     pointsLabel.setText("Points: " + String.valueOf(currentContestant.getPoints()));
+                }else if (currentContestant == null){
+                    System.out.println("p");
                 }
 
             }
