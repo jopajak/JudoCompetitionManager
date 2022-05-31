@@ -24,7 +24,7 @@
          </effect></Button>
       <ScrollPane layoutX="84.0" layoutY="118.0" prefHeight="202.0" prefWidth="451.0">
          <content>
-            <ListView fx:id="contestantsList" prefHeight="200.0" prefWidth="449.0" />
+            <ListView fx:id="contestantsListView" prefHeight="200.0" prefWidth="449.0" />
          </content>
       </ScrollPane>
       <ImageView fx:id="goBack" fitHeight="40.0" fitWidth="43.0" layoutX="14.0" layoutY="344.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">

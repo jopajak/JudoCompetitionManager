@@ -46,41 +46,39 @@ public class RankingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String name, surname, age, weight, sex;
-        Contestant current;
         ArrayList<Contestant> contestants = new ArrayList<>();
 
 
         //pobranie instancji kasy Database (singleton)
         Database db = Database.getInstance();
-        List contestantList = null;
+        List contestantDB = null;
 
         try {
-            contestantList = db.getCompetitorsList();
+            contestantDB = db.getCompetitorsList();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
+        int size = Objects.requireNonNull(contestantDB).size();
 
-        int size = contestantList.size();
-
-        ArrayList<String> mojaLista= new ArrayList<String>();
+        ArrayList<String> contestantTemp = new ArrayList<String>();
         for (int i = 0; i < size; i++) {
-            mojaLista= (ArrayList<String>) contestantList.get(i);
-            System.out.println(mojaLista);
+            contestantTemp = (ArrayList<String>) contestantDB.get(i);
 
-            name = String.valueOf(mojaLista.get(0));
-            surname = String.valueOf(mojaLista.get(1));
-            age = String.valueOf(mojaLista.get(2));
-            weight = String.valueOf(mojaLista.get(3));
-            sex = String.valueOf(mojaLista.get(4));
-            Contestant newOne = new Contestant(name, surname, Integer.parseInt(age), Double.parseDouble(weight), Boolean.valueOf(sex));
-            System.out.println(newOne);
+            name = String.valueOf(contestantTemp.get(0));
+            surname = String.valueOf(contestantTemp.get(1));
+            age = String.valueOf(contestantTemp.get(2));
+            weight = String.valueOf(contestantTemp.get(3));
+            sex = String.valueOf(contestantTemp.get(4));
+            Contestant newOne = new Contestant(
+                    name,
+                    surname,
+                    Integer.parseInt(age),
+                    Double.parseDouble(weight),
+                    Boolean.valueOf(sex));
             contestants.add(newOne);
         }
-
-
-
 
 
         rankingList.getItems().addAll(contestants);
@@ -89,7 +87,7 @@ public class RankingController implements Initializable {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
                 if(currentContestant != null) {
-                    System.out.println(currentContestant + "00000");
+                    System.out.println(currentContestant);
                     currentContestant = (Contestant) rankingList.getSelectionModel().getSelectedItem();
 
                     nameLabel.setText(currentContestant.getName() + " " + currentContestant.getSurname());
