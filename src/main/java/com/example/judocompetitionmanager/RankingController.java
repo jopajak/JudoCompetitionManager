@@ -81,31 +81,10 @@ public class RankingController implements Initializable {
 
 
 
-/*
-        for (int i = 0; i < size; i++) {
-            current = (Contestant) contestantList.get(i);
-            System.out.println(current);
-
-            name = String.valueOf(current.getName());
-            surname = String.valueOf(current.getSurname());
-            age = String.valueOf(current.getAge());
-            weight = String.valueOf(current.getWeight());
-            sex = String.valueOf(current.getSex());
-            Contestant newOne = new Contestant(name, surname, Integer.parseInt(age), Double.parseDouble(weight), Boolean.valueOf(sex));
-            System.out.println(newOne);
-            contestants.add(newOne);
-            //contestants.add(current);
-        }
-
-         */
-
-        //contestants.add(new Contestant("Jan", "sfv", 34, 40.0, true));
-        //contestants.add(new Contestant("Jang", "sfv", 34, 40.0, false));
-        //System.out.println(contestants.get(0));
 
 
         rankingList.getItems().addAll(contestants);
-        currentContestant = rankingList.getSelectionModel().getSelectedItem();
+        currentContestant = rankingList.getItems().get(0);
         rankingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
@@ -120,7 +99,7 @@ public class RankingController implements Initializable {
                     weightLabel.setText(String.valueOf(currentContestant.getWeight() + "kg"));
                     pointsLabel.setText("Points: " + String.valueOf(currentContestant.getPoints()));
                 }else if (currentContestant == null){
-                    System.out.println("p");
+                    System.out.println("kicha");
                 }
 
             }
