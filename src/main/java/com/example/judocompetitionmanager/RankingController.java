@@ -51,6 +51,7 @@ public class RankingController implements Initializable {
 
         //pobranie instancji kasy Database (singleton)
         Database db = Database.getInstance();
+
         List contestantDB = null;
 
         try {
@@ -58,6 +59,8 @@ public class RankingController implements Initializable {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        System.out.println(list);
 
 
         int size = Objects.requireNonNull(contestantDB).size();
@@ -79,6 +82,7 @@ public class RankingController implements Initializable {
                     Boolean.valueOf(sex));
             contestants.add(newOne);
         }
+
 
 
         rankingList.getItems().addAll(contestants);
