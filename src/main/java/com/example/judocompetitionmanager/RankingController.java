@@ -25,16 +25,10 @@ public class RankingController implements Initializable {
     private Stage stage;
     private Parent root;
     private Scene scene;
-    private Contestant currentContestant;
-    String name;
-    String surname;
-    int age;
-    double weight;
-    boolean sex;
-    ArrayList currrent=new ArrayList();
+    Contestant currentContestant;
 
     @FXML
-    public ListView rankingList;
+    public ListView<Contestant> rankingList;
     @FXML
     private Label nameLabel;
     @FXML
@@ -51,59 +45,64 @@ public class RankingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        String name, surname, age, weight, sex;
         ArrayList<Contestant> contestants = new ArrayList<>();
 
-        contestants.add(new Contestant("Jack", "Dsfg", 25, 90.0, true));
-        /**
-        contestants.add(new Contestant("Mike", "Jesf", 26, 86.3, true));
-        contestants.add(new Contestant("Jane", "Teaf", 24, 67.5, false));
-         **/
 
-
-
+        //pobranie instancji kasy Database (singleton)
         Database db = Database.getInstance();
-        List<Contestant> list = null;
+
+        List contestantDB = null;
+
         try {
-            list = db.getCompetitorsList();
+            contestantDB = db.getCompetitorsList();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         System.out.println(list);
 
-//           for (int i = 0; i < Objects.requireNonNull(list).size(); i ++){
-//                System.out.println(i);
-//                //System.out.println(list.get(i).getClass());
-//                currrent = (ArrayList) list.get(i);
-//
-//                name = String.valueOf(currrent.get(0));
-//                surname = String.valueOf(currrent.get(1));
-//                age = (int)(currrent.get(2));
-//                weight = (Double)currrent.get(3);
-//                sex = (boolean)currrent.get(4);
-//                contestants.add(new Contestant(name, surname, age, weight, sex));
-//
-//            }
+
+        int size = Objects.requireNonNull(contestantDB).size();
+
+        ArrayList<String> contestantTemp = new ArrayList<String>();
+        for (int i = 0; i < size; i++) {
+            contestantTemp = (ArrayList<String>) contestantDB.get(i);
+
+            name = String.valueOf(contestantTemp.get(0));
+            surname = String.valueOf(contestantTemp.get(1));
+            age = String.valueOf(contestantTemp.get(2));
+            weight = String.valueOf(contestantTemp.get(3));
+            sex = String.valueOf(contestantTemp.get(4));
+            Contestant newOne = new Contestant(
+                    name,
+                    surname,
+                    Integer.parseInt(age),
+                    Double.parseDouble(weight),
+                    Boolean.valueOf(sex));
+            contestants.add(newOne);
+        }
 
 
-
-
-        //System.out.println(name);
-
-        System.out.println(contestants + "-----------------------");
 
         rankingList.getItems().addAll(contestants);
+        currentContestant = rankingList.getItems().get(0);
         rankingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
-                currentContestant = (Contestant) rankingList.getSelectionModel().getSelectedItem();
+                if(currentContestant != null) {
+                    System.out.println(currentContestant);
+                    currentContestant = (Contestant) rankingList.getSelectionModel().getSelectedItem();
 
-                nameLabel.setText(currentContestant.getName() + " " + currentContestant.getSurname() );
-                ageLabel.setText(String.valueOf(currentContestant.getAge()));
-                sexLabel.setText(currentContestant.getSexString());
-                weightCategoryLabel.setText(currentContestant.getWeightCategory());
-                weightLabel.setText(String.valueOf(currentContestant.getWeight() + "kg"));
-                pointsLabel.setText("Points: " + String.valueOf(currentContestant.getPoints()));
+                    nameLabel.setText(currentContestant.getName() + " " + currentContestant.getSurname());
+                    ageLabel.setText(String.valueOf(currentContestant.getAge()));
+                    sexLabel.setText(currentContestant.getSexString());
+                    weightCategoryLabel.setText(currentContestant.getWeightCategory());
+                    weightLabel.setText(String.valueOf(currentContestant.getWeight() + "kg"));
+                    pointsLabel.setText("Points: " + String.valueOf(currentContestant.getPoints()));
+                }else if (currentContestant == null){
+                    System.out.println("kicha");
+                }
 
             }
         });

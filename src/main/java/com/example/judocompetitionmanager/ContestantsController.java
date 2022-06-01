@@ -27,9 +27,8 @@ public class ContestantsController implements Initializable {
     private Scene scene;
     private Parent root;
     private Contestant currentContestant;
-    private String currentName;
     @FXML
-    private ListView contestantsList;
+    private ListView<Contestant> contestantsListView;
 
 
     public void onAddClick(ActionEvent e) {
@@ -53,42 +52,51 @@ public class ContestantsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        ArrayList<Contestant> contestants = new ArrayList<Contestant>();
         Database db = Database.getInstance();
+        List contestantDB = null;
         try {
-            db.addContestant(new Contestant("Jake", "sdvvf", 12, 40.0, true));
-            db.addContestant(new Contestant("Jahgnfg", "sdvvf", 12, 40.0, true));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        List competitors = null;
-        try {
-            competitors = db.getCompetitorsList();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        System.out.println(competitors);
-
-        try {
-            //competitors = db.getCompetitorsList();
-
-            competitors = (ArrayList<Contestant>) db.getCompetitorsList();
-            for(int i = 0; i < competitors.size(); i++){
-                //contestants.add(competitors(i));
-            }
+            contestantDB = db.getCompetitorsList();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ArrayList<Contestant> list = new ArrayList<>();
-        list.add(new Contestant("Jake", "sdvvf", 12, 40.0, true));
-        contestantsList.getItems().addAll(list);
-        contestantsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        int size = contestantDB.size();
+        ArrayList<String> temp = new ArrayList<String>();
+        for (int i = 0; i < size; i++) {
+            String name, surname, age, weight, sex;
+            temp = (ArrayList<String>) contestantDB.get(i);
+
+            name = String.valueOf(temp.get(0));
+            surname = String.valueOf(temp.get(1));
+            age = String.valueOf(temp.get(2));
+            weight = String.valueOf(temp.get(3));
+            sex = String.valueOf(temp.get(4));
+            Contestant newOne = new Contestant(
+                    name,
+                    surname,
+                    Integer.parseInt(age),
+                    Double.parseDouble(weight),
+                    Boolean.valueOf(sex));
+            contestants.add(newOne);
+        }
+
+
+
+        contestantsListView.getItems().addAll(contestants);
+        currentContestant = contestantsListView.getItems().get(0);
+        contestantsListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
 
-                currentContestant = (Contestant) contestantsList.getSelectionModel().getSelectedItem();
-                currentName = currentContestant.getName();
-                System.out.println(currentName);
+                if(currentContestant != null) {
+                    currentContestant = (Contestant) contestantsListView.getSelectionModel().getSelectedItem();
+                    String currentName = currentContestant.getName();
+                    System.out.println(currentName);
+                }else {
+                    System.out.println("kicha");
+                }
+
             }
         });
 
