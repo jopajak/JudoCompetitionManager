@@ -48,50 +48,6 @@ public class MainScene extends Application {
             e.printStackTrace();
         }
 
-        //Stage firstStage = new Stage();
-        //Group root = new Group();
-        /**Scene scene = new Scene(root, 600, 400, Color.PURPLE);
-
-         stage.getIcons().add(new Image("icon.jpg"));
-         stage.setTitle("Judo Competition Manger");
-         //stage.setWidth(420);
-         //stage.setHeight(420);
-         //stage.setX(100);
-         //stage.setY(100);
-         //stage.setFullScreen(true);
-         stage.setFullScreenExitHint("to escape press Escape button ");
-         stage.setFullScreenExitKeyCombination(KeyCombination.valueOf("Esc"));
-
-         Text text = new Text();
-         text.setText("Yeah.");
-         text.setX(50);
-         text.setY(50);
-         text.setFont(Font.font("Verdana", 50));
-         text.setFill(Color.LIMEGREEN);
-
-         Line line = new Line();
-         line.setStartX(200);
-         line.setStartY(200);
-         line.setEndX(500);
-         line.setEndY(200);
-         line.setStrokeWidth(5);
-         line.setStroke(Color.LIME);
-         line.setOpacity(0.5);
-         line.setRotate(45);
-
-         Image image = new Image("icon.jpg");
-         ImageView iconView = new ImageView(image);
-         iconView.setX(400);
-         iconView.setX(350);
-
-
-         //root.getChildren().add(text);
-         //root.getChildren().add(line);
-         //root.getChildren().add(iconView);
-
-         stage.setScene(scene);
-         stage.show();
-         **/
     }
 
     public void logout(Stage stage) {

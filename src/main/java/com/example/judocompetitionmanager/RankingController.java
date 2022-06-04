@@ -42,9 +42,60 @@ public class RankingController implements Initializable {
     @FXML
     private Label pointsLabel;
 
+    public void merge(int[] tab, int left, int right, int middle){
+        int leftSize = middle - left + 1;
+        int rightSize = right - middle;
+        int[] tabLeft = new int[leftSize];
+        int[] tabRight = new int[rightSize];
+
+        for (int i = 0; i < leftSize; i++){
+            tabLeft[i] = tab[left + i];
+        }
+        for (int i = 0; i < rightSize; i++){
+            tabRight[i] = tab[middle + 1 + i];
+        }
+
+        int indexLeft = 0;
+        int indexRight = 0;
+        int currentIndex;
+
+        for(currentIndex = 1; indexLeft < leftSize && indexRight < rightSize; currentIndex++){
+            if(tabLeft[indexLeft] <= tabRight[indexRight]){
+                tab[currentIndex] = tabLeft[indexLeft++];
+
+            }else{
+                tab[currentIndex] = tabRight[indexRight++];
+
+            }
+            while(indexLeft < leftSize){
+                tab[currentIndex++] = tabLeft[indexLeft++];
+            }
+            while(indexRight < rightSize){
+                tab[currentIndex++] = tabRight[indexRight++];
+            }
+
+        }
+
+    }
+    private void merge_sort(int[] tab1, int l, int r){
+        if (r > l){
+            int m = (l + r)/2;
+            merge_sort(tab1, l, m);
+            merge_sort(tab1, m+1, r);
+            merge(tab1, l, r, m);
+        }
+    }
+
+
+
+
+
+
+
+
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle){
         String name, surname, age, weight, sex;
         ArrayList<Contestant> contestants = new ArrayList<>();
 
@@ -79,6 +130,42 @@ public class RankingController implements Initializable {
                     Boolean.valueOf(sex));
             contestants.add(newOne);
         }
+
+
+        System.out.println(contestants);
+        contestants.get(0).setPoints(2);
+        contestants.get(1).setPoints(6);
+        contestants.get(2).setPoints(4);
+        contestants.get(3).setPoints(1);
+
+
+        int[] points = new int[size];
+        for (int i = 0; i < size; i++){
+            Contestant curr = contestants.get(i);
+            points[i] = (int) curr.getPoints();
+            System.out.println(points[i]);
+        }
+
+        System.out.println("Points sorted");
+
+        merge_sort(points, 0, size-1);
+        for (int j=0; j < size; j++){
+            System.out.println(points[j]);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         rankingList.getItems().addAll(contestants);

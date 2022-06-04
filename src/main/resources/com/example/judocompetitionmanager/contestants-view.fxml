@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.ContestantsController">
+<AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.ContestantsController">
    <children>
       <TextField layoutX="167.0" layoutY="45.0">
          <effect>
