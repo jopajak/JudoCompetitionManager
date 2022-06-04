@@ -26,6 +26,9 @@ public class RankingController implements Initializable {
     private Parent root;
     private Scene scene;
     Contestant currentContestant;
+    int[] tab;
+    int N;
+    int[] t;
 
     @FXML
     public ListView<Contestant> rankingList;
@@ -42,62 +45,12 @@ public class RankingController implements Initializable {
     @FXML
     private Label pointsLabel;
 
-    public void merge(int[] tab, int left, int right, int middle){
-        int leftSize = middle - left + 1;
-        int rightSize = right - middle;
-        int[] tabLeft = new int[leftSize];
-        int[] tabRight = new int[rightSize];
-
-        for (int i = 0; i < leftSize; i++){
-            tabLeft[i] = tab[left + i];
-        }
-        for (int i = 0; i < rightSize; i++){
-            tabRight[i] = tab[middle + 1 + i];
-        }
-
-        int indexLeft = 0;
-        int indexRight = 0;
-        int currentIndex;
-
-        for(currentIndex = 1; indexLeft < leftSize && indexRight < rightSize; currentIndex++){
-            if(tabLeft[indexLeft] <= tabRight[indexRight]){
-                tab[currentIndex] = tabLeft[indexLeft++];
-
-            }else{
-                tab[currentIndex] = tabRight[indexRight++];
-
-            }
-            while(indexLeft < leftSize){
-                tab[currentIndex++] = tabLeft[indexLeft++];
-            }
-            while(indexRight < rightSize){
-                tab[currentIndex++] = tabRight[indexRight++];
-            }
-
-        }
-
-    }
-    private void merge_sort(int[] tab1, int l, int r){
-        if (r > l){
-            int m = (l + r)/2;
-            merge_sort(tab1, l, m);
-            merge_sort(tab1, m+1, r);
-            merge(tab1, l, r, m);
-        }
-    }
-
-
-
-
-
-
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         String name, surname, age, weight, sex;
         ArrayList<Contestant> contestants = new ArrayList<>();
+        ArrayList<Contestant> sortedContestants = new ArrayList<>();
 
 
         //pobranie instancji kasy Database (singleton)
@@ -148,27 +101,29 @@ public class RankingController implements Initializable {
 
         System.out.println("Points sorted");
 
-        merge_sort(points, 0, size-1);
+
+        tab = points;
+        N = size;
+        t = new int[N];
+
+        mergesort(0, N-1);
         for (int j=0; j < size; j++){
             System.out.println(points[j]);
+        }
+
+        for (int i = size-1; i >= 0; i-- ){
+            for (int j =0; j < size; j++){
+                if (contestants.get(j).getPoints() == points[i]){
+                    sortedContestants.add(contestants.get(j));
+                    System.out.println(points[i] + " " + contestants.get(j));
+                }
+            }
         }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        rankingList.getItems().addAll(contestants);
+        rankingList.getItems().addAll(sortedContestants);
         currentContestant = rankingList.getItems().get(0);
         rankingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
@@ -190,6 +145,36 @@ public class RankingController implements Initializable {
             }
         });
 
+    }
+
+
+// Sortowanie przez scalanie (mergesort)
+// Tomasz Lubinski
+// (c)2006 www.algorytm.org
+    public void merge(int pocz, int sr, int kon)
+    {
+        int i,j,q;
+        for (i=pocz; i<=kon; i++) t[i]=tab[i];  // Skopiowanie danych do tablicy pomocniczej
+        i=pocz; j=sr+1; q=pocz;                 // Ustawienie wskaźników tablic
+        while (i<=sr && j<=kon) {         // Przenoszenie danych z sortowaniem ze zbiorów pomocniczych do tablicy głównej
+            if (t[i]<t[j])
+                tab[q++]=t[i++];
+            else
+                tab[q++]=t[j++];
+        }
+        while (i<=sr) tab[q++]=t[i++]; // Przeniesienie nie skopiowanych danych ze zbioru pierwszego w przypadku, gdy drugi zbiór się skończył
+    }
+
+    /* Procedura sortowania tab[pocz...kon] */
+    public void mergesort(int pocz, int kon)
+    {
+        int sr;
+        if (pocz<kon) {
+            sr=(pocz+kon)/2;
+            mergesort(pocz, sr);    // Dzielenie lewej części
+            mergesort(sr+1, kon);   // Dzielenie prawej części
+            merge(pocz, sr, kon);   // Łączenie części lewej i prawej
+        }
     }
 
     public void goBack(MouseEvent mouseEvent) {
