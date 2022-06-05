@@ -85,9 +85,6 @@ public class RankingController implements Initializable {
             }
         }
 
-
-
-
         rankingList.getItems().addAll(contestants);
         currentContestant = rankingList.getItems().get(0);
         rankingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
