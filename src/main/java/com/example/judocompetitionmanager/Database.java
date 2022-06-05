@@ -44,11 +44,18 @@ public final class Database {
         try {
             db = factory.open(new File(FILENAME), options);
             ID_FOR_CONTESTANTS = 1;
+
+            JSONObject jsonObj = new JSONObject();
+            writeJsonObject("Contestants", jsonObj);
+            addContestant(new Contestant("Marcin", "Kwiatkowski", 19, 78, true));
+            writeJsonObject("Users", jsonObj);
+            writeJsonObject("Competitions", jsonObj);
+
             LOGGER.log(Level.INFO, "DB initialized successfully");
             LOGGER.log(Level.INFO, "directory: {0}", getFilename());
             LOGGER.log(Level.INFO, "cache: {0} MiB", getCacheSize());
             LOGGER.log(Level.INFO, "compression: {0}", isCompressionEnabled());
-        } catch (IOException ioException) {
+        } catch (IOException | JSONException ioException) {
             LOGGER.log(Level.SEVERE, "Failed to create DB, exception: ", ioException);
             System.exit(1);
         }
@@ -200,32 +207,6 @@ public final class Database {
         return Collections.emptyList();
     }
 
-    /*
-    @SuppressWarnings("unchecked")
-    public List<Investment> readInvestments(String key) {
-        LOGGER.log(Level.FINER, "Reading Investments at key: {0} ", key);
-        try {
-            ObjectInputStream oos = new ObjectInputStream(new ByteArrayInputStream(db.get(bytes(key))));
-            return new ArrayList<>((List<Investment>) oos.readObject());
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return new ArrayList<>();
-    }
-
-    public void writeInvestments(String key, List<Investment> list) {
-        LOGGER.log(Level.FINE, "Writing Investments at key: {0} ", key);
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream oos;
-        try {
-            oos = new ObjectOutputStream(bos);
-            oos.writeObject(list);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        db.put(bytes(key), bos.toByteArray());
-    }
-    */
     public JSONObject jsonify_competition(List<String> list) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put("name", list.get(0));
@@ -247,8 +228,26 @@ public final class Database {
         jo.put("weightCategory", list.get(5));
         jo.put("points", list.get(6));
         jo.put("ID", list.get(7));
-        System.out.println(jo);
         return jo;
+    }
+
+    public JSONObject jsonify_user(List<String> list) throws JSONException {
+        JSONObject jo = new JSONObject();
+        jo.put("login", list.get(0));
+        jo.put("name", list.get(1));
+        jo.put("surname", list.get(2));
+        jo.put("passwordHash", list.get(3));
+        jo.put("salt", list.get(4));
+        return jo;
+    }
+
+    public void addUser(User user) throws JSONException {
+        List<String> list = Arrays.asList(user.getLogin(), user.getName(),user.getSurname(), user.getPasswordHash(), user.getSalt());
+        JSONObject users = readJsonObject("Users");
+        delete("Users");
+        JSONObject jo = jsonify_user(list);
+        users.put(user.getLogin(), jo);
+        writeJsonObject("Users", users);
     }
 
     public void addContestant(Contestant contestant) throws JSONException {
@@ -257,7 +256,6 @@ public final class Database {
         }
         contestant.setID(ID_FOR_CONTESTANTS);
         List<String> list = Arrays.asList(contestant.getName(), contestant.getSurname(), Integer.toString(contestant.getAge()), Double.toString(contestant.getWeight()), Boolean.toString(contestant.getSex()), contestant.getWeightCategory(), Integer.toString(contestant.getPoints()), Integer.toString(ID_FOR_CONTESTANTS));
-        System.out.println(list);
         JSONObject contestants = readJsonObject("Contestants");
         delete("Contestants");
         JSONObject jo = jsonify_contestant(list);
@@ -269,9 +267,18 @@ public final class Database {
         List<Contestant> contestants = getCompetitorsList();
         for(Contestant contestant : contestants){
             String contestantKey = contestant.getName() + " " + contestant.getSurname();
-            System.out.println(contestantKey);
             if (key.equals(contestantKey)){
                 return contestant;
+            }
+        }
+        return null;
+    }
+    public User getUser(String key) throws JSONException {
+        List<User> users = getUsersList();
+        for(User user:users){
+            String userKey = user.getLogin();
+            if (key.equals(userKey)){
+                return user;
             }
         }
         return null;
@@ -281,22 +288,32 @@ public final class Database {
         List<Contestant> contestants = getCompetitorsList();
         for(Contestant contestant : contestants){
             String contestantKey = contestant.getName() + " " + contestant.getSurname();
-            System.out.println(contestantKey);
             if (key.equals(contestantKey)){
                 return true;
             }
         }
         return false;
     }
+    public boolean isUserPresent(String key) throws JSONException {
+        List<User> users = getUsersList();
+        for(User user:users){
+            String userKey = user.getLogin();
+            if (key.equals(userKey)){
+                return true;
+            }
+        }
+        return false;
+    }
 
-//    public boolean authenticate(String key, String password) throws JSONException {
-//        if (!isContestantPresent(key)){
-//            return false;
-//        }
-//        Contestant contestantToCheck = getContestant(key);
-//        assert contestantToCheck != null;
-//        return hash(password) == contestantToCheck.getPasswordHash();
-//    }
+
+    public boolean authenticateUser(User user, String password) throws JSONException {
+        if (!isUserPresent(user.getLogin())){
+            return false;
+        }
+        User userToCheck = getUser(user.getLogin());
+        assert userToCheck != null;
+        return User.generateHash(password, user.getSalt()).equals(userToCheck.getPasswordHash());
+    }
 
 
     /**
@@ -366,6 +383,26 @@ public final class Database {
             contestantsList.add(contestant);
         }
         return contestantsList;
+    }
+
+    public List<User> getUsersList() throws JSONException {
+        List<User> usersList = new ArrayList<>();
+        JSONObject users = readJsonObject("Users");
+        Iterator<String> keys = users.keys();
+
+        while(keys.hasNext()) {
+            String key = keys.next();
+            JSONObject user = (JSONObject) users.get(key);
+
+            String login = user.getString("login");
+            String name = user.getString("name");
+            String surname = user.getString("surname");
+            String passwordHash = user.getString("passwordHash");
+            String salt = user.getString("salt");
+            User new_user = new User(login, name, surname, passwordHash, salt);
+            usersList.add(new_user);
+        }
+        return usersList;
     }
 
     /**

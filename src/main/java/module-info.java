@@ -13,6 +13,7 @@ module com.example.judocompetitionmanager {
     requires java.logging;
     requires leveldb;
     requires json;
+    requires org.apache.commons.codec;
 
     opens com.example.judocompetitionmanager to javafx.fxml;
     exports com.example.judocompetitionmanager;
