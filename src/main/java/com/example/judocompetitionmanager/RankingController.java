@@ -85,13 +85,6 @@ public class RankingController implements Initializable {
         }
 
 
-        System.out.println(contestants);
-        contestants.get(0).setPoints(2);
-        contestants.get(1).setPoints(6);
-        contestants.get(2).setPoints(4);
-        contestants.get(3).setPoints(1);
-
-
         int[] points = new int[size];
         for (int i = 0; i < size; i++){
             Contestant curr = contestants.get(i);
