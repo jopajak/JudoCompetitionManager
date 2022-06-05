@@ -11,6 +11,7 @@ public class Contestant {
     private String weightCategory;
     private int points;
     private int ID;
+    private String coach;
 
     public Contestant(String name, String surname, int age, double weight, Boolean sex) {
         this.name = name;
