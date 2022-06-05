@@ -24,6 +24,6 @@ public class Testing {
         System.out.println(isAuth);
 
         Database.close();
-        System.out.println("bye");
+
     }
 }
