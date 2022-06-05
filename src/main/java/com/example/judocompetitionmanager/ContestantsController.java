@@ -26,7 +26,6 @@ public class ContestantsController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private Contestant currentContestant;
     @FXML
     private ListView<Contestant> contestantsListView;
 
@@ -44,7 +43,6 @@ public class ContestantsController implements Initializable {
         if (getClass().getResource("app.css") != null) {
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("app.css")).toExternalForm());
         }
-        //stage.getIcons().add(new Image("icon.jpg"));
         stage.setScene(scene);
         stage.show();
     }
@@ -59,21 +57,6 @@ public class ContestantsController implements Initializable {
             e.printStackTrace();
         }
         contestantsListView.getItems().addAll(contestants);
-
-//        contestantsListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ObservableValue observableValue, Object o, Object t1) {
-//
-//                if(currentContestant != null) {
-//                    currentContestant = (Contestant) contestantsListView.getSelectionModel().getSelectedItem();
-//                    String currentName = currentContestant.getName();
-//                    System.out.println(currentName);
-//                }else {
-//                    System.out.println("fail");
-//                }
-//
-//            }
-//        });
 
     }
 

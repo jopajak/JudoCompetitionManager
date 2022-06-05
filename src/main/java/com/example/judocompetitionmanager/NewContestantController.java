@@ -46,9 +46,9 @@ public class NewContestantController implements Initializable {
         boolean sex;
 
         if (!name.equals("") &&
-            !surname.equals("") &&
-            ageSpinner.getValue() != null &&
-            weightSpinner.getValue() != null){
+                !surname.equals("") &&
+                ageSpinner.getValue() != null &&
+                weightSpinner.getValue() != null){
 
             int age = ageSpinner.getValue();
             Double weight = weightSpinner.getValue();
@@ -109,7 +109,6 @@ public class NewContestantController implements Initializable {
         valueFactoryWeight.setValue(50.0);
         weightSpinner.setValueFactory(valueFactoryWeight);
 
-        }
+    }
 
 }
-

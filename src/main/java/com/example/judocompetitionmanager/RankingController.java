@@ -15,10 +15,7 @@ import javafx.stage.Stage;
 import org.json.JSONException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class RankingController implements Initializable {
 
@@ -50,6 +47,7 @@ public class RankingController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle){
         Database db = Database.getInstance();
         List<Contestant> contestants = null;
+        ArrayList<Contestant> sortedContestants = new ArrayList<>();
         try {
             contestants = db.getCompetitorsList();
         } catch (JSONException e) {
@@ -64,28 +62,17 @@ public class RankingController implements Initializable {
             System.out.println(points[i]);
         }
 
-        System.out.println("Points sorted");
-
-
-        tab = points;
-        N = size;
-        t = new int[N];
-
-        mergesort(0, N-1);
-        for (int j=0; j < size; j++){
-            System.out.println(points[j]);
-        }
+        Arrays.stream(points).sorted();
 
         for (int i = size-1; i >= 0; i-- ){
             for (int j =0; j < size; j++){
                 if (contestants.get(j).getPoints() == points[i]){
-                    //sortedContestants.add(contestants.get(j));
-                    System.out.println(points[i] + " " + contestants.get(j));
+                    sortedContestants.add(contestants.get(j));
                 }
             }
         }
 
-        rankingList.getItems().addAll(contestants);
+        rankingList.getItems().addAll(sortedContestants);
         currentContestant = rankingList.getItems().get(0);
         rankingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
@@ -101,42 +88,12 @@ public class RankingController implements Initializable {
                     weightLabel.setText(String.valueOf(currentContestant.getWeight() + "kg"));
                     pointsLabel.setText("Points: " + String.valueOf(currentContestant.getPoints()));
                 }else if (currentContestant == null){
-                    System.out.println("kicha");
+                    System.out.println("failed");
                 }
 
             }
         });
 
-    }
-
-
-// Sortowanie przez scalanie (mergesort)
-// Tomasz Lubinski
-// (c)2006 www.algorytm.org
-    public void merge(int pocz, int sr, int kon)
-    {
-        int i,j,q;
-        for (i=pocz; i<=kon; i++) t[i]=tab[i];  // Skopiowanie danych do tablicy pomocniczej
-        i=pocz; j=sr+1; q=pocz;                 // Ustawienie wskaźników tablic
-        while (i<=sr && j<=kon) {         // Przenoszenie danych z sortowaniem ze zbiorów pomocniczych do tablicy głównej
-            if (t[i]<t[j])
-                tab[q++]=t[i++];
-            else
-                tab[q++]=t[j++];
-        }
-        while (i<=sr) tab[q++]=t[i++]; // Przeniesienie nie skopiowanych danych ze zbioru pierwszego w przypadku, gdy drugi zbiór się skończył
-    }
-
-    /* Procedura sortowania tab[pocz...kon] */
-    public void mergesort(int pocz, int kon)
-    {
-        int sr;
-        if (pocz<kon) {
-            sr=(pocz+kon)/2;
-            mergesort(pocz, sr);    // Dzielenie lewej części
-            mergesort(sr+1, kon);   // Dzielenie prawej części
-            merge(pocz, sr, kon);   // Łączenie części lewej i prawej
-        }
     }
 
     public void goBack(MouseEvent mouseEvent) {
