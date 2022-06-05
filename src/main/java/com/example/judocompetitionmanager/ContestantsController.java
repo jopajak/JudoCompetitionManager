@@ -84,21 +84,21 @@ public class ContestantsController implements Initializable {
 
 
         contestantsListView.getItems().addAll(contestants);
-        currentContestant = contestantsListView.getItems().get(0);
-        contestantsListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-            @Override
-            public void changed(ObservableValue observableValue, Object o, Object t1) {
 
-                if(currentContestant != null) {
-                    currentContestant = (Contestant) contestantsListView.getSelectionModel().getSelectedItem();
-                    String currentName = currentContestant.getName();
-                    System.out.println(currentName);
-                }else {
-                    System.out.println("kicha");
-                }
-
-            }
-        });
+//        contestantsListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ObservableValue observableValue, Object o, Object t1) {
+//
+//                if(currentContestant != null) {
+//                    currentContestant = (Contestant) contestantsListView.getSelectionModel().getSelectedItem();
+//                    String currentName = currentContestant.getName();
+//                    System.out.println(currentName);
+//                }else {
+//                    System.out.println("fail");
+//                }
+//
+//            }
+//        });
 
     }
 

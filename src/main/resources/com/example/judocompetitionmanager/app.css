@@ -28,13 +28,26 @@
 }
 .list-view{
     -fx-font-size: 12;
+    -fx-background-color: #13226A;
 }
-.scroll-pane{
+
+.scroll-bar{
+    -fx-background-color: #13226A;
 }
+.increment-button, .decrement-button {
+    -fx-background-color: #13226A;
+}
+.scroll-bar:horizontal .track, .scroll-bar:vertical .track {
+    -fx-background-color: #13226A;
+}
+
 .list-view .list-cell{
     -fx-control-inner-background: #13226A;
     -fx-control-inner-background-alt: derive(-fx-control-inner-background, 50%);
     -fx-text-fill: #80D8F7;
+}
+.scroll-bar:horizontal .thumb, .scroll-bar:vertical .thumb {
+    -fx-background-color: #80D8F7;
 }
 
 #iconLabel{

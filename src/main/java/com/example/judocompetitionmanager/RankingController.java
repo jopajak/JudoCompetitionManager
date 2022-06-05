@@ -26,6 +26,9 @@ public class RankingController implements Initializable {
     private Parent root;
     private Scene scene;
     Contestant currentContestant;
+    int[] tab;
+    int N;
+    int[] t;
 
     @FXML
     public ListView<Contestant> rankingList;
@@ -44,14 +47,14 @@ public class RankingController implements Initializable {
 
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle){
         String name, surname, age, weight, sex;
         ArrayList<Contestant> contestants = new ArrayList<>();
+        ArrayList<Contestant> sortedContestants = new ArrayList<>();
 
 
         //pobranie instancji kasy Database (singleton)
         Database db = Database.getInstance();
-
         List contestantDB = null;
 
         try {
@@ -59,8 +62,6 @@ public class RankingController implements Initializable {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        System.out.println(list);
 
 
         int size = Objects.requireNonNull(contestantDB).size();
@@ -84,8 +85,45 @@ public class RankingController implements Initializable {
         }
 
 
+        System.out.println(contestants);
+        contestants.get(0).setPoints(2);
+        contestants.get(1).setPoints(6);
+        contestants.get(2).setPoints(4);
+        contestants.get(3).setPoints(1);
 
-        rankingList.getItems().addAll(contestants);
+
+        int[] points = new int[size];
+        for (int i = 0; i < size; i++){
+            Contestant curr = contestants.get(i);
+            points[i] = (int) curr.getPoints();
+            System.out.println(points[i]);
+        }
+
+        System.out.println("Points sorted");
+
+
+        tab = points;
+        N = size;
+        t = new int[N];
+
+        mergesort(0, N-1);
+        for (int j=0; j < size; j++){
+            System.out.println(points[j]);
+        }
+
+        for (int i = size-1; i >= 0; i-- ){
+            for (int j =0; j < size; j++){
+                if (contestants.get(j).getPoints() == points[i]){
+                    sortedContestants.add(contestants.get(j));
+                    System.out.println(points[i] + " " + contestants.get(j));
+                }
+            }
+        }
+
+
+
+
+        rankingList.getItems().addAll(sortedContestants);
         currentContestant = rankingList.getItems().get(0);
         rankingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
@@ -107,6 +145,36 @@ public class RankingController implements Initializable {
             }
         });
 
+    }
+
+
+// Sortowanie przez scalanie (mergesort)
+// Tomasz Lubinski
+// (c)2006 www.algorytm.org
+    public void merge(int pocz, int sr, int kon)
+    {
+        int i,j,q;
+        for (i=pocz; i<=kon; i++) t[i]=tab[i];  // Skopiowanie danych do tablicy pomocniczej
+        i=pocz; j=sr+1; q=pocz;                 // Ustawienie wskaźników tablic
+        while (i<=sr && j<=kon) {         // Przenoszenie danych z sortowaniem ze zbiorów pomocniczych do tablicy głównej
+            if (t[i]<t[j])
+                tab[q++]=t[i++];
+            else
+                tab[q++]=t[j++];
+        }
+        while (i<=sr) tab[q++]=t[i++]; // Przeniesienie nie skopiowanych danych ze zbioru pierwszego w przypadku, gdy drugi zbiór się skończył
+    }
+
+    /* Procedura sortowania tab[pocz...kon] */
+    public void mergesort(int pocz, int kon)
+    {
+        int sr;
+        if (pocz<kon) {
+            sr=(pocz+kon)/2;
+            mergesort(pocz, sr);    // Dzielenie lewej części
+            mergesort(sr+1, kon);   // Dzielenie prawej części
+            merge(pocz, sr, kon);   // Łączenie części lewej i prawej
+        }
     }
 
     public void goBack(MouseEvent mouseEvent) {
