@@ -23,6 +23,8 @@ public class Testing {
         boolean isAuth = db.authenticateUser(adminUser, "admin123");
         System.out.println(isAuth);
 
+        GlobalData.currentUserLogin = "admin";
+
         Database.close();
 
 
