@@ -51,38 +51,13 @@ public class ContestantsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        ArrayList<Contestant> contestants = new ArrayList<Contestant>();
         Database db = Database.getInstance();
-        List contestantDB = null;
+        List<Contestant> contestants = null;
         try {
-            contestantDB = db.getCompetitorsList();
+            contestants = db.getCompetitorsList();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        int size = contestantDB.size();
-        ArrayList<String> temp = new ArrayList<String>();
-        for (int i = 0; i < size; i++) {
-            String name, surname, age, weight, sex;
-            temp = (ArrayList<String>) contestantDB.get(i);
-
-            name = String.valueOf(temp.get(0));
-            surname = String.valueOf(temp.get(1));
-            age = String.valueOf(temp.get(2));
-            weight = String.valueOf(temp.get(3));
-            sex = String.valueOf(temp.get(4));
-            Contestant newOne = new Contestant(
-                    name,
-                    surname,
-                    Integer.parseInt(age),
-                    Double.parseDouble(weight),
-                    Boolean.valueOf(sex));
-            contestants.add(newOne);
-        }
-
-
-
         contestantsListView.getItems().addAll(contestants);
 
 //        contestantsListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
