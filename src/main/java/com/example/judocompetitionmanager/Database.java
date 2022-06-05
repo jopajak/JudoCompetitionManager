@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static java.util.Objects.hash;
 import static org.iq80.leveldb.impl.Iq80DBFactory.*;
 
 /**
@@ -34,6 +35,7 @@ public final class Database {
     private static Database instance = new Database();
     private static final String FILENAME = "database";
     private static DB db;
+    private static int ID_FOR_CONTESTANTS;
 
     private Database() {
         Options options = new Options();
@@ -41,6 +43,7 @@ public final class Database {
         options.compressionType(CompressionType.NONE);
         try {
             db = factory.open(new File(FILENAME), options);
+            ID_FOR_CONTESTANTS = 1;
             LOGGER.log(Level.INFO, "DB initialized successfully");
             LOGGER.log(Level.INFO, "directory: {0}", getFilename());
             LOGGER.log(Level.INFO, "cache: {0} MiB", getCacheSize());
@@ -242,18 +245,55 @@ public final class Database {
         jo.put("weight", list.get(3));
         jo.put("sex", list.get(4));
         jo.put("weightCategory", list.get(5));
+        jo.put("points", list.get(6));
+        jo.put("ID", list.get(7));
+        jo.put("passwordHash", list.get(8));
         System.out.println(jo);
         return jo;
     }
 
     public void addContestant(Contestant contestant) throws JSONException {
-        List<String> list = Arrays.asList(contestant.getName(), contestant.getSurname(), Integer.toString(contestant.getAge()), Double.toString(contestant.getWeight()), Boolean.toString(contestant.getSex()), contestant.getWeightCategory());
+        List<String> list = Arrays.asList(contestant.getName(), contestant.getSurname(), Integer.toString(contestant.getAge()), Double.toString(contestant.getWeight()), Boolean.toString(contestant.getSex()), contestant.getWeightCategory(), Integer.toString(contestant.getPoints()), Integer.toString(ID_FOR_CONTESTANTS), Integer.toString(contestant.getPasswordHash()));
+        ID_FOR_CONTESTANTS ++;
         System.out.println(list);
         JSONObject contestants = readJsonObject("Contestants");
         delete("Contestants");
         JSONObject jo = jsonify_contestant(list);
-        contestants.put(contestant.getName(), jo);
+        contestants.put(contestant.getName() + " " + contestant.getSurname(), jo);
         writeJsonObject("Contestants", contestants);
+    }
+
+    public Contestant getContestant(String key) throws JSONException {
+        List<Contestant> contestants = getCompetitorsList();
+        for(Contestant contestant : contestants){
+            String contestantKey = contestant.getName() + " " + contestant.getSurname();
+            System.out.println(contestantKey);
+            if (key.equals(contestantKey)){
+                return contestant;
+            }
+        }
+        return null;
+    }
+
+    public boolean isContestantPresent(String key) throws JSONException {
+        List<Contestant> contestants = getCompetitorsList();
+        for(Contestant contestant : contestants){
+            String contestantKey = contestant.getName() + " " + contestant.getSurname();
+            System.out.println(contestantKey);
+            if (key.equals(contestantKey)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean authenticate(String key, String password) throws JSONException {
+        if (!isContestantPresent(key)){
+            return false;
+        }
+        Contestant contestantToCheck = getContestant(key);
+        assert contestantToCheck != null;
+        return hash(password) == contestantToCheck.getPasswordHash();
     }
 
 
@@ -318,7 +358,9 @@ public final class Database {
             int age = competitor.getInt("age");
             double weight = competitor.getDouble("weight");
             boolean sex = competitor.getBoolean("sex");
-            Contestant contestant = new Contestant(name, surname, age, weight, sex);
+            int points = competitor.getInt("points");
+            int passwordHash = competitor.getInt("passwordHash");
+            Contestant contestant = new Contestant(name, surname, age, weight, sex, points, passwordHash);
             contestantsList.add(contestant);
         }
         return contestantsList;
