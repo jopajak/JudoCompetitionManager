@@ -247,14 +247,16 @@ public final class Database {
         jo.put("weightCategory", list.get(5));
         jo.put("points", list.get(6));
         jo.put("ID", list.get(7));
-        jo.put("passwordHash", list.get(8));
         System.out.println(jo);
         return jo;
     }
 
     public void addContestant(Contestant contestant) throws JSONException {
-        List<String> list = Arrays.asList(contestant.getName(), contestant.getSurname(), Integer.toString(contestant.getAge()), Double.toString(contestant.getWeight()), Boolean.toString(contestant.getSex()), contestant.getWeightCategory(), Integer.toString(contestant.getPoints()), Integer.toString(ID_FOR_CONTESTANTS), Integer.toString(contestant.getPasswordHash()));
-        ID_FOR_CONTESTANTS ++;
+        if(!isContestantPresent(contestant.getName() + " " + contestant.getSurname())){
+            ID_FOR_CONTESTANTS ++;
+        }
+        contestant.setID(ID_FOR_CONTESTANTS);
+        List<String> list = Arrays.asList(contestant.getName(), contestant.getSurname(), Integer.toString(contestant.getAge()), Double.toString(contestant.getWeight()), Boolean.toString(contestant.getSex()), contestant.getWeightCategory(), Integer.toString(contestant.getPoints()), Integer.toString(ID_FOR_CONTESTANTS));
         System.out.println(list);
         JSONObject contestants = readJsonObject("Contestants");
         delete("Contestants");
@@ -287,14 +289,14 @@ public final class Database {
         return false;
     }
 
-    public boolean authenticate(String key, String password) throws JSONException {
-        if (!isContestantPresent(key)){
-            return false;
-        }
-        Contestant contestantToCheck = getContestant(key);
-        assert contestantToCheck != null;
-        return hash(password) == contestantToCheck.getPasswordHash();
-    }
+//    public boolean authenticate(String key, String password) throws JSONException {
+//        if (!isContestantPresent(key)){
+//            return false;
+//        }
+//        Contestant contestantToCheck = getContestant(key);
+//        assert contestantToCheck != null;
+//        return hash(password) == contestantToCheck.getPasswordHash();
+//    }
 
 
     /**
@@ -359,8 +361,8 @@ public final class Database {
             double weight = competitor.getDouble("weight");
             boolean sex = competitor.getBoolean("sex");
             int points = competitor.getInt("points");
-            int passwordHash = competitor.getInt("passwordHash");
-            Contestant contestant = new Contestant(name, surname, age, weight, sex, points, passwordHash);
+            int ID = competitor.getInt("ID");
+            Contestant contestant = new Contestant(name, surname, age, weight, sex, points, ID);
             contestantsList.add(contestant);
         }
         return contestantsList;

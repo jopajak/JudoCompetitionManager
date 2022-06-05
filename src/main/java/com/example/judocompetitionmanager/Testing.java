@@ -36,17 +36,17 @@ public class Testing {
         int hash2 = hash("amrnacja");
         int hash3 = hash("123");
 
-        db.addContestant(new Contestant("Kuba", "Kor1", 42, 82, true, 5, hash1));
-        db.addContestant(new Contestant("Kuba", "Kor", 52, 48, false, 0, hash2));
-        db.addContestant(new Contestant("Marian", "Zapalka", 22, 68, false, 2, hash3));
-        db.addContestant(new Contestant("Radoslaw", "Maciwoda", 19, 92, true, 15, 4256));
+        db.addContestant(new Contestant("Kuba", "Kor1", 42, 82, true));
+        db.addContestant(new Contestant("Kuba", "Kor", 52, 48, false));
+        db.addContestant(new Contestant("Marian", "Zapalka", 22, 68, false));
+        db.addContestant(new Contestant("Radoslaw", "Maciwoda", 19, 92, true));
+        db.addContestant(new Contestant("Joasia", "Pajak", 25, 92, true));
         JSONObject jo2 = db.readJsonObject("Contestants");
 
-        boolean isAuthenticated = db.authenticate("Kuba Kor", "amrnacja");
-        System.out.println("----------");
-        System.out.println(isAuthenticated);
-        System.out.println("----------");
+        db.addContestant(new Contestant("Joasia", "Pajak", 26, 52, true));
 
+        Contestant joasia = db.getContestant("Joasia Pajak");
+        System.out.println(joasia.getID());
 
 
 
