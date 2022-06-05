@@ -10,7 +10,7 @@ public class Contestant {
     private Boolean sex;              // sex, female = false, male = true
     private String weightCategory;
     private int points;
-    private int passwordHash;
+    private int ID;
 
     public Contestant(String name, String surname, int age, double weight, Boolean sex) {
         this.name = name;
@@ -19,18 +19,17 @@ public class Contestant {
         this.weight = weight;
         this.sex = sex;
         this.points = 0;
-        this.passwordHash = 0;
         assignToWeightCat(weight);
     }
 
-    public Contestant(String name, String surname, int age, double weight, Boolean sex, int points, int passwordHash) {
+    public Contestant(String name, String surname, int age, double weight, Boolean sex, int points, int ID) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.weight = weight;
         this.sex = sex;
         this.points = points;
-        this.passwordHash = passwordHash;
+        this.ID = ID;
         assignToWeightCat(weight);
     }
 
@@ -140,8 +139,11 @@ public class Contestant {
     public void addPoints(int pointsToAdd){
         this.points = this.points + pointsToAdd;
     }
-    public int getPasswordHash(){
-        return passwordHash;
-    }
 
+    public void setID(int ID){
+        this.ID = ID;
+    }
+    public int getID(){
+        return this.ID;
+    }
 }
