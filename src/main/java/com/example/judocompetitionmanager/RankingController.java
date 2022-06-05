@@ -48,43 +48,15 @@ public class RankingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        String name, surname, age, weight, sex;
-        ArrayList<Contestant> contestants = new ArrayList<>();
-        ArrayList<Contestant> sortedContestants = new ArrayList<>();
-
-
-        //pobranie instancji kasy Database (singleton)
         Database db = Database.getInstance();
-        List contestantDB = null;
-
+        List<Contestant> contestants = null;
         try {
-            contestantDB = db.getCompetitorsList();
+            contestants = db.getCompetitorsList();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
-        int size = Objects.requireNonNull(contestantDB).size();
-
-        ArrayList<String> contestantTemp = new ArrayList<String>();
-        for (int i = 0; i < size; i++) {
-            contestantTemp = (ArrayList<String>) contestantDB.get(i);
-
-            name = String.valueOf(contestantTemp.get(0));
-            surname = String.valueOf(contestantTemp.get(1));
-            age = String.valueOf(contestantTemp.get(2));
-            weight = String.valueOf(contestantTemp.get(3));
-            sex = String.valueOf(contestantTemp.get(4));
-            Contestant newOne = new Contestant(
-                    name,
-                    surname,
-                    Integer.parseInt(age),
-                    Double.parseDouble(weight),
-                    Boolean.valueOf(sex));
-            contestants.add(newOne);
-        }
-
-
+        int size = contestants.size();
         int[] points = new int[size];
         for (int i = 0; i < size; i++){
             Contestant curr = contestants.get(i);
@@ -107,7 +79,7 @@ public class RankingController implements Initializable {
         for (int i = size-1; i >= 0; i-- ){
             for (int j =0; j < size; j++){
                 if (contestants.get(j).getPoints() == points[i]){
-                    sortedContestants.add(contestants.get(j));
+                    //sortedContestants.add(contestants.get(j));
                     System.out.println(points[i] + " " + contestants.get(j));
                 }
             }
@@ -116,7 +88,7 @@ public class RankingController implements Initializable {
 
 
 
-        rankingList.getItems().addAll(sortedContestants);
+        rankingList.getItems().addAll(contestants);
         currentContestant = rankingList.getItems().get(0);
         rankingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
