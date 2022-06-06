@@ -45,17 +45,17 @@ public final class Database {
             db = factory.open(new File(FILENAME), options);
             ID_FOR_CONTESTANTS = 1;
 
-            JSONObject jsonObj = new JSONObject();
-            writeJsonObject("Contestants", jsonObj);
-            addContestant(new Contestant("Marcin", "Kwiatkowski", 19, 78, true));
-            writeJsonObject("Users", jsonObj);
-            writeJsonObject("Competitions", jsonObj);
+//            JSONObject jsonObj = new JSONObject();
+//            writeJsonObject("Contestants", jsonObj);
+//            addContestant(new Contestant("Marcin", "Kwiatkowski", 19, 78, true));
+//            writeJsonObject("Users", jsonObj);
+//            writeJsonObject("Competitions", jsonObj);
 
             LOGGER.log(Level.INFO, "DB initialized successfully");
             LOGGER.log(Level.INFO, "directory: {0}", getFilename());
             LOGGER.log(Level.INFO, "cache: {0} MiB", getCacheSize());
             LOGGER.log(Level.INFO, "compression: {0}", isCompressionEnabled());
-        } catch (IOException | JSONException ioException) {
+        } catch (IOException ioException) {
             LOGGER.log(Level.SEVERE, "Failed to create DB, exception: ", ioException);
             System.exit(1);
         }

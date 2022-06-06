@@ -52,6 +52,7 @@ public class LogInController {
             if (getClass().getResource("app.css") != null) {
                 scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
             }
+            stage.getIcons().add(new Image("icon.jpg"));
             stage.setScene((Scene) scene);
             stage.setResizable(false);
             stage.show();
@@ -75,6 +76,7 @@ public class LogInController {
         if (getClass().getResource("app.css") != null) {
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("app.css")).toExternalForm());
         }
+        stage.getIcons().add(new Image("icon.jpg"));
         stage.setScene(scene);
         stage.show();
     }

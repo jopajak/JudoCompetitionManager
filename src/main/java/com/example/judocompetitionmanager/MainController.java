@@ -48,6 +48,7 @@ public class MainController {
         if (getClass().getResource("app.css") != null) {
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("app.css")).toExternalForm());
         }
+        stage.getIcons().add(new Image("icon.jpg"));
         stage.setScene(scene);
         stage.show();
     }
@@ -66,6 +67,7 @@ public class MainController {
         if (getClass().getResource("app.css") != null) {
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("contests.css")).toExternalForm());
         }
+        stage.getIcons().add(new Image("icon.jpg"));
         stage.setScene(scene);
         stage.show();
     }
@@ -83,6 +85,7 @@ public class MainController {
         if (getClass().getResource("app.css") != null) {
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("app.css")).toExternalForm());
         }
+        stage.getIcons().add(new Image("icon.jpg"));
         stage.setScene(scene);
         stage.show();
     }
