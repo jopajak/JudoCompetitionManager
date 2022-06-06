@@ -64,7 +64,7 @@ public class MainController {
         stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         if (getClass().getResource("app.css") != null) {
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("app.css")).toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("contests.css")).toExternalForm());
         }
         stage.setScene(scene);
         stage.show();

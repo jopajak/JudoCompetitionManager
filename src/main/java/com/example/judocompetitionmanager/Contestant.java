@@ -38,9 +38,6 @@ public class Contestant {
     public String toString() {
         return  name + " " +
                 surname + "   " +
-                //weight + "kg " +
-                //sex + " " +
-                //"age: " +
                 age + " " +
                 weightCategory + ' ' +
                 ", points=" + points + " ";

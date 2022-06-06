@@ -39,7 +39,6 @@ public class LogInController {
         //boolean isAuth = db.authenticateUser(userName, password);
         db.close();
 
-
         //if(isAuth){
         if(userName.equals("Trainer") && password.equals("judo")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
@@ -53,7 +52,6 @@ public class LogInController {
             if (getClass().getResource("app.css") != null) {
                 scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
             }
-            //stage.getIcons().add(new Image("icon.jpg"));
             stage.setScene((Scene) scene);
             stage.setResizable(false);
             stage.show();
