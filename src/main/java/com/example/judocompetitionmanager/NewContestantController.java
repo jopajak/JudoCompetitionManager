@@ -8,10 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.json.JSONException;
 
@@ -34,6 +31,8 @@ public class NewContestantController implements Initializable {
     private Spinner<Integer> ageSpinner;
     @FXML
     private Spinner<Double> weightSpinner;
+    @FXML
+    private Label info;
     @FXML
     private RadioButton male;
     @FXML
@@ -58,15 +57,26 @@ public class NewContestantController implements Initializable {
                 sex = false;
             }
 
+            /** tworzenie nowego zawodnika z danych od użytkowanika*/
             Contestant newOne = new Contestant(name, surname, age, weight, sex);
 
             Database db = Database.getInstance();
             try {
                 db.addContestant(newOne);
                 System.out.println("New contestant added successfully!");
+
+                /**sprawdzanie czy zawodnik jest już w bazie i dodanie go do bazy*/
+//                String key = newOne.getName() + " " + newOne.getSurname();
+//                if(!db.isContestantPresent(key)) {
+//                    db.addContestant(newOne);
+//                    System.out.println("New contestant added successfully!");
+//                }else{
+//                    info.setText("This contestant already exists in the database.");
+//                }
             } catch (JSONException ex) {
                 ex.printStackTrace();
             }
+            db.close();
 
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("contestants-view.fxml"));
@@ -82,7 +92,7 @@ public class NewContestantController implements Initializable {
 
     }
 
-
+    /** powrót do okna głównego*/
     @FXML
     public void switchToMainScene(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
@@ -97,6 +107,7 @@ public class NewContestantController implements Initializable {
         stage.show();
     }
 
+    /**wczytanie danych do elementów GUI .fxml*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SpinnerValueFactory<Integer> valueFactoryAge =
