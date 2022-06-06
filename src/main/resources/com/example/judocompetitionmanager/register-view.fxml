@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.RegisterController">
+   <children>
+      <Label fx:id="bigLabel" alignment="CENTER" layoutY="24.0" prefHeight="17.0" prefWidth="600.0" text="JUDO COMPETITION MANAGER" />
+      <TextField fx:id="name" alignment="CENTER" layoutX="226.0" layoutY="154.0">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </TextField>
+      <TextField fx:id="surname" alignment="CENTER" layoutX="226.0" layoutY="188.0">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </TextField>
+      <TextField fx:id="login" alignment="CENTER" layoutX="226.0" layoutY="223.0">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </TextField>
+      <TextField fx:id="password" alignment="CENTER" layoutX="226.0" layoutY="259.0">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </TextField>
+      <Label layoutX="76.0" layoutY="158.0" prefHeight="17.0" prefWidth="149.0" text="Name" />
+      <Label layoutX="76.0" layoutY="192.0" prefHeight="17.0" prefWidth="149.0" text="Surname" />
+      <Label layoutX="76.0" layoutY="227.0" prefHeight="17.0" prefWidth="149.0" text="Login" />
+      <Label layoutX="76.0" layoutY="263.0" prefHeight="17.0" prefWidth="149.0" text="Password" />
+      <Label alignment="CENTER" layoutX="213.0" layoutY="68.0" prefHeight="17.0" prefWidth="174.0" text="REGISTER" />
+      <Button fx:id="registerButton" layoutX="251.0" layoutY="318.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="25.0" prefWidth="99.0" text="Register" />
+   </children>
+</AnchorPane>

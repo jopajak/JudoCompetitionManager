@@ -8,11 +8,15 @@
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="login" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.LogInController">
+<AnchorPane fx:id="login" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.judocompetitionmanager.LogInController">
    <children>
       <Label id="iconLabel" alignment="CENTER" layoutX="1.0" prefHeight="43.0" prefWidth="600.0" text="JUDO COMPETITION MANAGER" />
       <Label contentDisplay="CENTER" layoutX="135.0" layoutY="145.0" text="Login" />
       <Label contentDisplay="CENTER" layoutX="125.0" layoutY="179.0" text="Password" />
+      <TextField fx:id="nameTextField" alignment="CENTER" layoutX="229.0" layoutY="141.0">
+         <effect>
+            <InnerShadow />
+         </effect></TextField>
       <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="229.0" layoutY="175.0">
          <effect>
             <InnerShadow />
@@ -20,15 +24,11 @@
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor></PasswordField>
-      <TextField fx:id="nameTextField" alignment="CENTER" layoutX="229.0" layoutY="141.0">
-         <effect>
-            <InnerShadow />
-         </effect></TextField>
       <Button alignment="CENTER" layoutX="229.0" layoutY="325.0" mnemonicParsing="false" onAction="#switchToMainScene" prefHeight="25.0" prefWidth="70.0" text="Log In">
          <effect>
             <InnerShadow />
          </effect></Button>
-      <Button contentDisplay="CENTER" layoutX="308.0" layoutY="325.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Sign In">
+      <Button fx:id="signIn" contentDisplay="CENTER" layoutX="308.0" layoutY="325.0" mnemonicParsing="false" onAction="#switchToRegister" prefHeight="25.0" prefWidth="70.0" text="Sign In">
          <effect>
             <InnerShadow />
          </effect></Button>

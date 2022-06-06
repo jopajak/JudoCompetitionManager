@@ -23,9 +23,6 @@ public class RankingController implements Initializable {
     private Parent root;
     private Scene scene;
     Contestant currentContestant;
-    int[] tab;
-    int N;
-    int[] t;
 
     @FXML
     public ListView<Contestant> rankingList;
@@ -45,6 +42,7 @@ public class RankingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        /**pobranie danych z bazy*/
         Database db = Database.getInstance();
         List<Contestant> contestants = null;
         ArrayList<Contestant> sortedContestants = new ArrayList<>();
@@ -59,11 +57,12 @@ public class RankingController implements Initializable {
         for (int i = 0; i < size; i++){
             Contestant curr = contestants.get(i);
             points[i] = (int) curr.getPoints();
-            System.out.println(points[i]);
         }
 
+        /**sortowanie względem punktów*/
         Arrays.stream(points).sorted();
 
+        /**wczytywanie od zawodnika o największej liczbie punktów do tego i najmniejszej*/
         for (int i = size-1; i >= 0; i-- ){
             for (int j =0; j < size; j++){
                 if (contestants.get(j).getPoints() == points[i]){
@@ -72,6 +71,7 @@ public class RankingController implements Initializable {
             }
         }
 
+        /**wczytanie danych do elementów GUI w .fxml*/
         rankingList.getItems().addAll(sortedContestants);
         currentContestant = rankingList.getItems().get(0);
         rankingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
@@ -96,6 +96,7 @@ public class RankingController implements Initializable {
 
     }
 
+    /**powrót do okna głównego*/
     public void goBack(MouseEvent mouseEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         try {

@@ -16,7 +16,7 @@ root.combo-box-base{
 }
 .root.root{
     -fx-background-color: #80D8F7;
-    -fx-font-size: 6;
+    -fx-font-size: 12;
 }
 
 .button{
