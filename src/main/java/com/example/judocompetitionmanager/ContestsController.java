@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.json.JSONException;
@@ -56,6 +57,21 @@ public class ContestsController implements Initializable {
             ex.printStackTrace();
         }
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        if (getClass().getResource("app.css") != null) {
+            scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
+        }
+        stage.getIcons().add(new Image("icon.jpg"));
+        stage.setScene(scene);
+        stage.show();
+
 
     }
 
@@ -71,7 +87,7 @@ public class ContestsController implements Initializable {
         if (getClass().getResource("app.css") != null) {
             scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
         }
-        //stage.getIcons().add(new Image("icon.jpg"));
+        stage.getIcons().add(new Image("icon.jpg"));
         stage.setScene(scene);
         stage.show();
     }

@@ -59,13 +59,15 @@ public class RankingController implements Initializable {
             points[i] = (int) curr.getPoints();
         }
 
+
         /**sortowanie względem punktów*/
-        Arrays.stream(points).sorted();
+        Arrays.sort(points);
+
 
         /**wczytywanie od zawodnika o największej liczbie punktów do tego i najmniejszej*/
         for (int i = size-1; i >= 0; i-- ){
             for (int j =0; j < size; j++){
-                if (contestants.get(j).getPoints() == points[i]){
+                if (contestants.get(j).getPoints() == points[i] && !sortedContestants.contains(contestants.get(j))){
                     sortedContestants.add(contestants.get(j));
                 }
             }

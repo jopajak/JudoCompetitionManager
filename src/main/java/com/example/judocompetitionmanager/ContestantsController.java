@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.json.JSONException;
@@ -43,6 +44,7 @@ public class ContestantsController implements Initializable {
         if (getClass().getResource("app.css") != null) {
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("app.css")).toExternalForm());
         }
+        stage.getIcons().add(new Image("icon.jpg"));
         stage.setScene(scene);
         stage.show();
     }
@@ -53,11 +55,12 @@ public class ContestantsController implements Initializable {
         List<Contestant> contestants = null;
         try {
             contestants = db.getCompetitorsList();
+            System.out.println(contestants);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         contestantsListView.getItems().addAll(contestants);
-
+        db.close();
     }
 
     public void goBack(MouseEvent mouseEvent) {
@@ -72,7 +75,7 @@ public class ContestantsController implements Initializable {
         if (getClass().getResource("app.css") != null) {
             scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
         }
-        //stage.getIcons().add(new Image("icon.jpg"));
+        stage.getIcons().add(new Image("icon.jpg"));
         stage.setScene(scene);
         stage.show();
     }

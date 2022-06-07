@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.json.JSONException;
 
@@ -64,15 +65,6 @@ public class NewContestantController implements Initializable {
             try {
                 db.addContestant(newOne);
                 System.out.println("New contestant added successfully!");
-
-                /**sprawdzanie czy zawodnik jest już w bazie i dodanie go do bazy*/
-//                String key = newOne.getName() + " " + newOne.getSurname();
-//                if(!db.isContestantPresent(key)) {
-//                    db.addContestant(newOne);
-//                    System.out.println("New contestant added successfully!");
-//                }else{
-//                    info.setText("This contestant already exists in the database.");
-//                }
             } catch (JSONException ex) {
                 ex.printStackTrace();
             }
@@ -86,6 +78,7 @@ public class NewContestantController implements Initializable {
             if (getClass().getResource("app.css") != null) {
                 scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("app.css")).toExternalForm());
             }
+            stage.getIcons().add(new Image("icon.jpg"));
             stage.setScene(scene);
             stage.show();
         }
